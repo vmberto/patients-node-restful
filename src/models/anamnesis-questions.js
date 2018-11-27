@@ -1,45 +1,36 @@
-const Sequelize = require('sequelize');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
 
-
-const AnamnesisQuestionFactory = (sequelize, DataTypes) => {
-  const attributes = {
+  const AnamnesisQuestion = sequelize.define('AnamnesisQuestion', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
     title: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     type: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     options: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true
     },
     anamnesis_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     }
+  },
+    {
+      underscored: true,
+    });
 
-  };
-
-  const config = {
-    underscored: true
-  }
-
-  const AnamnesisQuestion = sequelize.define('tb_anamnesis_questions', attributes, config);
-
-  AnamnesisQuestion.associate = models => {
+  AnamnesisQuestion.associate = function (models) {
     AnamnesisQuestion.belongsTo(models.Anamnesis, { foreignKey: 'anamnesis_id' });
   };
-
-
   return AnamnesisQuestion;
 };
-
-module.exports = AnamnesisQuestionFactory;

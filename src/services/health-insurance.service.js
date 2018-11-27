@@ -1,4 +1,4 @@
-const db = require("../app.js");
+const db = require("../models/index.js");
 
 const HealthInsurancesSerivce = {
 

@@ -1,51 +1,49 @@
+'use strict';
 module.exports = (sequelize, DataTypes) => {
-    const attributes = {
+
+    const Address = sequelize.define('Address', {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
         city: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         district: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         street: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         number: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         complement: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         zip_code: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         patients_id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false
         }
-    };
-    const config = {
-        underscored: true,
-        timestamps: false
-    }
+    },
+        {
+            underscored: true,
+            timestamps: false
+        });
 
-    const Address = sequelize.define('tb_addresses', attributes, config);
-
-    Address.associate = models => {
+    Address.associate = function (models) {
         Address.belongsTo(models.Patients, { foreignKey: 'patients_id' });
     };
-
-
     return Address;
 };

@@ -1,34 +1,25 @@
-const sequelize = require('../config');
-const Sequelize = require('sequelize');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
 
-
-const AnamnesisFactory = (sequelize, DataTypes) => {
-  const attributes = {
+  const Anamnesis = sequelize.define('Anamnesis', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     }
-    
+  },
+    {
+      underscored: true,
+      freezeTableName: true
+    });
+
+  Anamnesis.associate = function (models) {
+    Anamnesis.hasMany(models.Anamnesis, { foreignKey: 'anamnesis_id' });
   };
-  const config = {
-    underscored: true,
-    freezeTableName: true
-  }
-
-  const Anamnesis = sequelize.define('tb_anamnesis', attributes, config);
-
-  Anamnesis.associate = models => {
-    Anamnesis.hasMany(models.Anamnesis, {foreignKey: 'anamnesis_id'});
-  };
-
-
   return Anamnesis;
 };
-
-module.exports = AnamnesisFactory;

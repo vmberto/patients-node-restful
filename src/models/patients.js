@@ -1,42 +1,34 @@
-const sequelize = require('../config');
-const Sequelize = require('sequelize');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
 
-const PatientsFactory = (sequelize, DataTypes) => {
-  const attributes = {
+  const Patients = sequelize.define('Patients', {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       autoIncrement: true,
       primaryKey: true,
       allowNull: false
     },
     name: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     health_insurance_id: { //FOREIGN KEY
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     contact_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       allowNull: false
     }
-    
-  };
-  const config = {
-    underscored: true
-  }
+  },
+    {
+      underscored: true,
+    });
 
-  const Patients = sequelize.define('tb_patients', attributes, config);
-
-  Patients.associate = models => {
+  Patients.associate = function (models) {
     Patients.belongsTo(models.HealthInsurance, {foreignKey: 'health_insurance_id'});
     Patients.belongsTo(models.Contact, {foreignKey: 'contact_id'});
     Patients.hasMany(models.Address, {foreignKey: 'patients_id'});
   };
-
-
   return Patients;
 };
-
-module.exports = PatientsFactory;

@@ -1,23 +1,19 @@
-const PdfGeneratorService = require('./services/pdf-generator.service');
-
-const createModels = require('./models');
-const healthInsuranceRouter = require('./routers/health-insurance.router');
-const userRouter = require('./routers/user.router');
-const patientsRouter = require('./routers/patients.router');
-
-const tokenGuard = require('./middlewares/token-guard');
-
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
+const tokenGuard = require('./middlewares/token-guard');
 
+//routers
+const healthInsuranceRouter = require('./routers/health-insurance.router');
+const userRouter = require('./routers/user.router');
+const patientsRouter = require('./routers/patients.router');
 
+const db = require('./models/index');
 
-const db = createModels();
-db.sequelize.sync();
-module.exports = db;
+//test
+const PdfGeneratorService = require('./services/pdf-generator.service');
+
 
 
 const app = express();
@@ -36,8 +32,7 @@ app.set('view engine', 'ejs');
 
 app.use('/', userRouter);
 
-
-app.use(tokenGuard());
+// app.use(tokenGuard());
 
 app.use('/', patientsRouter);
 app.use('/', healthInsuranceRouter);
@@ -45,8 +40,10 @@ app.use('/', healthInsuranceRouter);
 
 
 app.get('/', (req, res, next) => {
-    res.end();
+
 });
+
+
 
 app.get('/pdf', (res, req, next) => {
     const serv = new PdfGeneratorService();
@@ -57,5 +54,3 @@ app.get('/pdf', (res, req, next) => {
 
 
 app.listen(port,  () => { console.log(`Server Running on Port ${port}`) });
-
-

@@ -1,23 +1,21 @@
-const Sequelize = require('sequelize');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
 
-const UserFactory = (sequelize, DataTypes) => {
-    const attributes = {
+    const User = sequelize.define('User', {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
         },
-        email: Sequelize.STRING,
-        password: Sequelize.STRING,
-        name: Sequelize.STRING
-    };
-    const config = {
-        underscored: true
-    }
+        email: DataTypes.STRING,
+        password: DataTypes.STRING,
+        name: DataTypes.STRING
+    },
+        {
+            underscored: true,
+        });
 
-    const User = sequelize.define('tb_users', attributes, config);
+    User.associate = function (models) { };
 
     return User;
 };
-
-module.exports = UserFactory;

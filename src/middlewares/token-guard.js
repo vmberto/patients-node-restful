@@ -11,8 +11,6 @@ function getTokenFromHeaders(headers) {
 }
 
 const tokenGuard = () => (req, res, next) => {
-  console.log(1);
-
   const token = getTokenFromHeaders(req.headers);
 
   const hasAccess = userService.verifyToken(token)

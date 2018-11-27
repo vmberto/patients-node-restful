@@ -1,29 +1,23 @@
-const Sequelize = require('sequelize');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
 
-const ContactFactory = (sequelize, DataTypes) => {
-    const attributes = {
+    const Contact = sequelize.define('Contact', {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
-        phone: Sequelize.STRING,
-        email: Sequelize.STRING
+        phone: DataTypes.STRING,
+        email: DataTypes.STRING
+    },
+        {
+            underscored: true,
+            freezeTableName: true
+        });
+
+    Contact.associate = function (models) {
+        Contact.hasMany(models.Patients, { foreignKey: 'contact_id' });
     };
-    const config = {
-        underscored: true,
-        timestamps: false
-    }
-
-    const Contact = sequelize.define('tb_contact', attributes, config);
-
-    Contact.associate = models => {
-        Contact.hasMany(models.Patients, {foreignKey: 'contact_id'});
-    };
-
-
     return Contact;
 };
-
-module.exports = ContactFactory;

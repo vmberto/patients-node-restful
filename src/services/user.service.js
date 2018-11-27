@@ -1,17 +1,18 @@
 const jwt = require('jsonwebtoken');
-const db = require('../app');
+const db = require("../models/index.js");
 
 const _saltRounds = 12
 const _jwtSecret = '0.rfyj3n9nzh'
 
 const UserService = {
 
-    login({ email }) {
+    login(email) {
+        
         return db.User.findOne({ where: { email } }).then(user => {
             const { id, email } = user
             user.password = null;
             return { user, token: jwt.sign({ id, email }, _jwtSecret) }
-        })
+        });
     },
 
     verifyToken(token) {

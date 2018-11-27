@@ -1,5 +1,5 @@
 const express = require('express');
-const healthInsurancesSerivce = require('../services/health-insurance.service');
+const healthInsurancesService = require('../services/health-insurance.service');
 const router = express.Router();
 
 const healthInsuranceRouter = router;
@@ -9,7 +9,7 @@ async function getAllHealthInsurances(req, res) {
 
     try {
 
-        let healthInsurances = await healthInsurancesSerivce.getAllHealthInsurances();
+        let healthInsurances = await healthInsurancesService.getAllHealthInsurances();
 
         let responseBundle = { data: healthInsurances }
 
@@ -25,7 +25,7 @@ async function getHealthInsurancePatientsRelation(req, res) {
 
     try {
 
-        let healthInsurances = await healthInsurancesSerivce.getHealthInsurancePatientsRelation();
+        let healthInsurances = await healthInsurancesService.getHealthInsurancePatientsRelation();
 
         let responseBundle = { data: healthInsurances }
 
@@ -43,7 +43,7 @@ async function postCreateHealthInsurance(req, res) {
     try {
         let params = req.body;
         
-        const newHealthInsurance = await healthInsurancesSerivce.createHealthInsurance(params);
+        const newHealthInsurance = await healthInsurancesService.createHealthInsurance(params);
 
         res.status(200).json({data: newHealthInsurance});
 
@@ -58,7 +58,7 @@ async function deleteHealthInsurance(req, res) {
     try {
         let params = req.params;
         
-        await healthInsurancesSerivce.deleteHealthInsurance(params.id);
+        await healthInsurancesService.deleteHealthInsurance(params.id);
 
         res.status(200).json({deleted: `O plano de saúde ${params.id} foi excluído`});
 

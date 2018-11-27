@@ -1,7 +1,7 @@
 const AddressesService = require('../services/addresses.service');
 const Router = require('express');
 const PatientsService = require('../services/patients.service');
-const healthInsurancesService = require('./health-insurance.router');
+const healthInsurancesService = require('../services/health-insurance.service');
 const ContactService = require('../services/contact.service');
 
 const patientsRouter = Router()
@@ -10,18 +10,19 @@ patientsRouter.get('/api/patients', getPatientsList);
 async function getPatientsList(req, res) {
 
     try {
-
+        
         let params = req.query;
 
         let patients = await PatientsService.getAllPatientsList(params);
 
+        
         params.total = await PatientsService.getPatientsTotalCount();
 
         const meta = {
             paginationConfig: {
                 "total": params.total === patients.count ? params.total : patients.count,
                 "count": patients.count,
-                "per_page": params.limit,
+                "per_page": parseInt(params.limit),
                 "current_page": parseInt(params.page),
                 "total_pages": params.total < params.limit || params.total !== patients.count ? 1 : Math.ceil(params.total / params.limit),
                 "links": {},
@@ -35,10 +36,12 @@ async function getPatientsList(req, res) {
 
 
         let responseBundle = { data: patients.rows, meta }
-
+        
         res.status(200).send(responseBundle)
 
     } catch (err) {
+        console.log(err);
+        
         res.status(400).send(err)
     }
 }

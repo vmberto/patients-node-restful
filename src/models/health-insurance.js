@@ -1,30 +1,24 @@
-const Sequelize = require('sequelize');
+'use strict';
+module.exports = (sequelize, DataTypes) => {
 
-const HealthInsuranceFactory = (sequelize, DataTypes) => {
-    const attributes = {
+    const HealthInsurance = sequelize.define('HealthInsurance', {
         id: {
-            type: Sequelize.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             allowNull: false
         },
         name: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
+    },
+        {
+            underscored: true,
+        });
+
+    HealthInsurance.associate = function (models) {
+        HealthInsurance.hasMany(models.Patients, { foreignKey: 'health_insurance_id' });
     };
-    const config = {
-        underscored: true,
-    }
-
-    const HealthInsurance = sequelize.define('tb_health_insurances', attributes, config);
-
-    HealthInsurance.associate = models => {
-        HealthInsurance.hasMany(models.Patients, {foreignKey: 'health_insurance_id'});
-    };
-
-
     return HealthInsurance;
 };
-
-module.exports = HealthInsuranceFactory;
