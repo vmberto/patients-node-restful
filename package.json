@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon src/app.js",
+    "start:pm2": "npm update && pm2 start app.js --name crawler -- --color --watch --log-date-format=\"YYYY-MM-DD HH:mm:ss\" && pm2 log"
   },
   "author": "",
   "license": "ISC",
