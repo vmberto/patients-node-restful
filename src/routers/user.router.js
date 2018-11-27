@@ -1,25 +1,9 @@
 const Router = require('express')
-const matchedData = require('express-validator/filter')['matchedData']
-const validationResult = require('express-validator/check')['validationResult'];
 const userRules = require('../rules/user.rules');
-const userService = require('../services/user.service');
-
+const UsersController = require('../controllers/users.controller');
 const userRouter = Router()
 
-userRouter.post('/api/login', userRules['forLogin'], (req, res) => {
-    const bodyParams = req.body;
-    const errors = validationResult(req);
-    
-
-    if (errors.isEmpty())
-        return res.status(422).json(errors.array());
-
-    console.log(bodyParams);    
-    const token = userService.login(bodyParams.email);
-    
-
-    return token.then(t => res.json(t));
-})
+userRouter.post('/api/login', userRules['forLogin'], UsersController.login);
 
 module.exports = userRouter;
 

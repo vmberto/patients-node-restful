@@ -4,10 +4,6 @@ const morgan = require('morgan');
 const cors = require('cors');
 const tokenGuard = require('./middlewares/token-guard');
 
-//routers
-const healthInsuranceRouter = require('./routers/health-insurance.router');
-const userRouter = require('./routers/user.router');
-const patientsRouter = require('./routers/patients.router');
 
 const db = require('./models/index');
 
@@ -30,18 +26,12 @@ app.set('views', './views');
 app.set('view engine', 'ejs');
 
 
-app.use('/', userRouter);
 
-// app.use(tokenGuard());
+app.use(tokenGuard());
 
-app.use('/', patientsRouter);
-app.use('/', healthInsuranceRouter);
+require('./routers')(app);
 
 
-
-app.get('/', (req, res, next) => {
-
-});
 
 
 
