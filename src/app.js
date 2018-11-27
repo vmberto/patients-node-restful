@@ -32,9 +32,6 @@ app.use(tokenGuard());
 require('./routers')(app);
 
 
-
-
-
 app.get('/pdf', (res, req, next) => {
     const serv = new PdfGeneratorService();
     serv.generatePdf('anamnesis');

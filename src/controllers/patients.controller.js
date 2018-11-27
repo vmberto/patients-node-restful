@@ -39,8 +39,6 @@ const PatientsController = {
             res.status(200).send(responseBundle)
 
         } catch (err) {
-            console.log(err);
-
             res.status(400).send(err)
         }
     },
@@ -48,7 +46,6 @@ const PatientsController = {
 
         try {
             let params = req.params;
-            console.log('rola')
 
             let patient = await PatientsService.getOnePatient(params.id)
 
