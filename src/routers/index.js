@@ -12,9 +12,6 @@ module.exports = function (app) {
 
     app.use('/', userRouter);
 
-    app.get('/', (req, res) => {
-        res.status(200).json({ "message": `Welcome to Clinical API v${process.env.VERSION}` });
-    });
 
 
 
