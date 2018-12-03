@@ -7,9 +7,9 @@ const PatientsService = {
 
         let queryBuilder = listQueryBuilder(queryParams);
 
-        queryBuilder.include = [{ model: db.HealthInsurance}, { model: db.Address }];
+        queryBuilder.include = [{ model: db.HealthInsurance }, { model: db.Address }];
 
-        if(queryParams.health_insurance) {
+        if (queryParams.health_insurance) {
             queryBuilder.include[0].where = { id: queryParams.health_insurance }
         }
 
@@ -17,13 +17,13 @@ const PatientsService = {
         return db.Patients.findAndCountAll(queryBuilder);
     },
 
-    getOnePatient(id) { 
+    getOnePatient(id) {
         return db.Patients
             .findById(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }] });
-     },
+    },
 
-    getPatientsTotalCount() { 
-        return db.Patients.count() 
+    getPatientsTotalCount() {
+        return db.Patients.count()
     },
 
     createPatient(params) {
@@ -40,10 +40,10 @@ const PatientsService = {
     },
 
     editPatient(id, patient, field) {
-        
+
         return db.Patients.update(patient, {
-           fields: [field],
-           where: {id}
+            fields: [field],
+            where: { id }
         });
 
     },
