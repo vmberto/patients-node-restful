@@ -8,10 +8,17 @@ const UserService = {
 
     login(email) {
         
-        return db.User.findOne({ where: { email } }).then(user => {
-            const { id, email } = user
+        return db.User.findOne({ where: { email } })
+        .then(user => {
+            if(!user) throw 'erro';
+            
+            const { id, email } = user;
             user.password = null;
             return { user, token: jwt.sign({ id, email }, _jwtSecret) }
+            
+        })
+        .catch(e => {
+            console.log(e);
         });
     },
 

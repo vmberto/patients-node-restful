@@ -1,5 +1,6 @@
 
 const userService = require('../services/user.service');
+const noAuthRoutes = require('../helpers/noauth-routes');
 
 function getTokenFromHeaders(headers) {
   const header = headers.authorization;
@@ -13,13 +14,12 @@ function getTokenFromHeaders(headers) {
 const tokenGuard = () => (req, res, next) => {
   const token = getTokenFromHeaders(req.headers);
 
-  let loginRequest;
-  if(req.url === '/api/login') loginRequest = true;
+  let isNoAuthRoute = noAuthRoutes(req.url);
   
-  const hasAccess = userService.verifyToken(token)
+  const hasAccess = userService.verifyToken(token);
   
   hasAccess.then(access => {
-    if (!access && !loginRequest) return res.status(403).send({ message: 'No access' })
+    if (!access && !isNoAuthRoute) return res.status(403).send({ message: 'No access' })
     next()
   });
 
