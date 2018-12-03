@@ -6,38 +6,36 @@ const tokenGuard = require('./middlewares/token-guard');
 
 
 const db = require('./models/index');
-
-//test
-const PdfGeneratorService = require('./services/pdf-generator.service');
+const routers = require('./routers');
 
 
 
 const app = express();
 const port = 5000;
 
-app.use( express.static('public') );
+app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(morgan('dev'));
-
-
 app.use(cors());
-app.set('views', './views');
-app.set('view engine', 'ejs');
-
 
 
 app.use(tokenGuard());
+routers(app);
 
-require('./routers')(app);
 
+
+//test=======================================================================
+const PdfGeneratorService = require('./services/pdf-generator.service');
 
 app.get('/pdf', (res, req, next) => {
     const serv = new PdfGeneratorService();
     serv.generatePdf('anamnesis');
     next();
 });
+app.set('views', './views');
+app.set('view engine', 'ejs');
+//===========================================================================
 
 
-
-app.listen(port,  () => { console.log(`Server Running on Port ${port}`) });
+app.listen(port, () => { console.log(`Server Running on Port ${port}`) });

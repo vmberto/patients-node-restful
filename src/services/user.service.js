@@ -30,7 +30,7 @@ const UserService = {
                     return;
                 }
 
-                UserService._user = db.User.findById(decoded['id']);
+                UserService._user = db.User.findByPk(decoded['id']);
                 resolve(true)
                 return;
             })
