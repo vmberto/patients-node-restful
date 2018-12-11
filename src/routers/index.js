@@ -12,6 +12,10 @@ module.exports = function (app) {
 
     app.use('/', userRouter);
 
+    app.get('/', (res) => {
+        res.send('psic-api 2018')
+    });
+
 
 
 
