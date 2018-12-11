@@ -2,25 +2,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
+const dotenv = require('dotenv');
+
+const routers = require('./routers');
 const tokenGuard = require('./middlewares/token-guard');
 
-
-const db = require('./models/index');
-const routers = require('./routers');
-
-
-
 const app = express();
-const port = 5000;
 
 app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors());
+dotenv.load();
 
 app.use(tokenGuard());
 routers(app);
+
+
+
+const port = process.env.SERVER_PORT;
 
 
 
