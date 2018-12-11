@@ -14,5 +14,7 @@ patientsRouter.put('/:id/edit', patientsController.postEditPatient);
 
 patientsRouter.delete('/:id/delete', patientsController.postDeletePatient);
 
+patientsRouter.post('/:id/create-session', patientsController.postCreatePatientSession);
+
 
 module.exports = patientsRouter;

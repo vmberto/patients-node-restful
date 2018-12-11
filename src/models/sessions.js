@@ -7,7 +7,18 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       allowNull: false
     },
-    description: DataTypes.STRING
+    description: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    humour: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    patients_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    }
   }, {
       underscored: true,
 

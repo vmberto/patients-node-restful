@@ -3,6 +3,7 @@ const AddressesService = require('../services/addresses.service');
 const PatientsService = require('../services/patients.service');
 const healthInsurancesService = require('../services/health-insurance.service');
 const ContactService = require('../services/contact.service');
+const SessionsService = require('../services/sessions.service');
 
 const PatientsController = {
 
@@ -126,6 +127,21 @@ const PatientsController = {
             res.status(400).send(err);
         }
 
+    },
+    async postCreatePatientSession(req, res) {
+        try {
+            let params = req.params;
+            let bodyParams = req.body;
+
+            const newSession = await SessionsService.createSessions(params.id, bodyParams);
+
+            const responseBundle = { newSession }
+
+            res.status(200).json(responseBundle);
+
+        } catch (err) {
+            res.status(400).send(err);
+        }
     }
 
 

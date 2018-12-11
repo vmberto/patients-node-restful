@@ -19,7 +19,7 @@ const PatientsService = {
 
     getOnePatient(id) {
         return db.Patients
-            .findByPk(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }] });
+            .findByPk(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }, { model: db.Sessions }] });
     },
 
     getPatientsTotalCount() {
