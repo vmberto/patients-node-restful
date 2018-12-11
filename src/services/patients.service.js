@@ -7,7 +7,7 @@ const PatientsService = {
 
         let queryBuilder = listQueryBuilder(queryParams);
 
-        queryBuilder.include = [{ model: db.HealthInsurance }, { model: db.Address }];
+        queryBuilder.include = [{ model: db.HealthInsurance }];
 
         if (queryParams.health_insurance) {
             queryBuilder.include[0].where = { id: queryParams.health_insurance }
