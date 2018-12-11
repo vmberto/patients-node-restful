@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:nodemon": "nodemon src/app.js",
-    "start": "npm update && pm2 start src/app.js --name node-rest -- --color --watch --log-date-format=\"YYYY-MM-DD HH:mm:ss\" && pm2 log"
+    "start:pm2": "npm update && pm2 start src/app.js --name node-rest -- --color --watch --log-date-format=\"YYYY-MM-DD HH:mm:ss\" && pm2 log",
+    "start": "node src/app.js"
   },
   "author": "",
   "license": "ISC",
