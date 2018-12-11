@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     contact_id: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    sessions_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   },
     {
@@ -29,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     Patients.belongsTo(models.HealthInsurance, {foreignKey: 'health_insurance_id'});
     Patients.belongsTo(models.Contact, {foreignKey: 'contact_id'});
     Patients.hasMany(models.Address, {foreignKey: 'patients_id'});
+    Patients.hasMany(models.Sessions, {foreignKey: 'sessions_id'});
   };
   return Patients;
 };

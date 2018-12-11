@@ -80,7 +80,7 @@ const PatientsController = {
             const params = req.body;
             const addressParams = params.address;
 
-            const newContact = await ContactService.createAddress(params)
+            const newContact = await ContactService.createContact(params)
 
             params.contact_id = newContact.id;
 

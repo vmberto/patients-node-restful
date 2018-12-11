@@ -19,7 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors());
 
-
 app.use(tokenGuard());
 routers(app);
 

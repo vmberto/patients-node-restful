@@ -2,7 +2,7 @@ const db = require("../models/index.js");
 
 const ContactService = {
 
-    createAddress(params) {
+    createContact(params) {
 
         return db.Contact.create(
             {
