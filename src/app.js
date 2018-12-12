@@ -38,4 +38,6 @@ app.set('view engine', 'ejs');
 //===========================================================================
 
 
-app.listen(process.env.PORT || port, () => { console.log(`Server Running on Port ${port}`) });
+app.listen(process.env.PORT || port, () => { 
+    console.log(`Server Running ${process.env.NODE_ENV === 'production' ? '(in production)' : ''}${ port ? 'on Port ' + port : ''}`);
+});

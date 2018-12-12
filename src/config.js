@@ -1,16 +1,13 @@
 const Sequelize = require('sequelize');
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/config/config.json')[env];
 
-const db = 'heroku_dbdcf546afa7aeb'
-const username = 'ba457ca43c12d1'
-const password = '48eee4ad'
-
-const sequelize = new Sequelize(db, username, password, {
-  host: 'us-cdbr-iron-east-01.cleardb.net',
-  dialect: 'mysql',
+const sequelize = new Sequelize(config.database, config.username, config.password, {
+  host: config.host,
+  dialect: config.dialect,
   operatorsAliases: false,
 
   logging: false,
-
 
   pool: {
     max: 5,

@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "ba457ca43c12d1",
+    "password": "48eee4ad",
+    "database": "heroku_dbdcf546afa7aeb",
+    "host": "us-cdbr-iron-east-01.cleardb.net",
     "dialect": "mysql"
   }
 }
