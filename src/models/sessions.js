@@ -14,10 +14,6 @@ module.exports = (sequelize, DataTypes) => {
     humour: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    patients_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
   }, {
       underscored: true,

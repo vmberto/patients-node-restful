@@ -31,10 +31,6 @@ module.exports = (sequelize, DataTypes) => {
         zip_code: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        patients_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
         }
     },
         {
