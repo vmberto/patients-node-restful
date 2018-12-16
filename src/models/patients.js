@@ -11,14 +11,6 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    health_insurance_id: { //FOREIGN KEY
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    contact_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
     }
   },
     {

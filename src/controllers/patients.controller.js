@@ -1,8 +1,6 @@
 
-const AddressesService = require('../services/addresses.service');
 const PatientsService = require('../services/patients.service');
 const healthInsurancesService = require('../services/health-insurance.service');
-const ContactService = require('../services/contact.service');
 const SessionsService = require('../services/sessions.service');
 
 const PatientsController = {
@@ -78,20 +76,11 @@ const PatientsController = {
     },
     async postCreatePatient(req, res) {
         try {
-            const params = req.body;
-            const addressParams = params.address;
-
-            const newContact = await ContactService.createContact(params)
-
-            params.contact_id = newContact.id;
+            let params = req.body;
 
             const newPatient = await PatientsService.createPatient(params);
 
-            addressParams.patients_id = newPatient.id;
-
-            const newAddress = await AddressesService.createAddress(addressParams);
-
-            const responseBundle = { newPatient, newAddress }
+            const responseBundle = { newPatient }
 
             res.status(200).json(responseBundle);
 

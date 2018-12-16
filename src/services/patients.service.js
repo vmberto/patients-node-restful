@@ -19,7 +19,7 @@ const PatientsService = {
 
     getOnePatient(id) {
         return db.Patients
-            .findByPk(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }, { model: db.Sessions, include: [{model: db.Humour}] } ] });
+            .findByPk(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }, { model: db.Sessions, include: [{ model: db.Humour }] }] });
     },
 
     getPatientsTotalCount() {
@@ -30,13 +30,27 @@ const PatientsService = {
 
         return db.Patients.create(
             {
-                id: null,
                 name: params.name,
                 health_insurance_id: params.health_insurance_id,
-                contact_id: params.contact_id,
-                created_at: params.created_at,
-                updated_at: params.updated_at
+                Contact: {
+                    email: params.email,
+                    phone: params.phone,
+                },
+                Addresses: [
+                    {
+                        city: params.address.city,
+                        district: params.address.district,
+                        zip_code: params.address.zip_code,
+                        street: params.address.street,
+                        number: params.address.number,
+                        complement: params.address.complement
+                    }
+                ]
+            },
+            {
+                include: [db.Address, db.Contact]
             });
+
     },
 
     editPatient(id, patient, field) {
