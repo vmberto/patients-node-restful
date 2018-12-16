@@ -4,14 +4,15 @@ const SessionsService = {
 
     createSessions(id, bodyParams) {
 
-        return db.Sessions.create(
-            {
-                id: null,
-                description: bodyParams.description,
-                humour: bodyParams.humour,
-                patients_id: id
-            });
-
+        return db.Sessions.create({
+            description: bodyParams.description,
+            patients_id: id,
+            Humour: {
+              title: bodyParams.humour_title,
+            }
+          }, {
+            include: [ db.Humour ]
+          });
 
     }
 

@@ -19,8 +19,8 @@ const userRules = {
     check('password')
       .custom((password, { req }) => {
         return db.User.findOne({ where: { email: req.body.email } })
-          .then(u => {
-              bcrypt.compare(password, u.password)
+          .then(user => {
+              bcrypt.compare(password, user.password)
           })
               
       }).withMessage('Email ou Senha inválido')

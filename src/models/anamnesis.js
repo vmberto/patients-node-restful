@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
   Anamnesis.associate = function (models) {
-    Anamnesis.hasMany(models.Anamnesis, { foreignKey: 'anamnesis_id' });
+    Anamnesis.hasMany(models.AnamnesisQuestion, { foreignKey: 'anamnesis_id' });
   };
   return Anamnesis;
 };

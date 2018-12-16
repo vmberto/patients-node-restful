@@ -9,14 +9,17 @@ const tokenGuard = require('./middlewares/token-guard');
 
 const app = express();
 
-app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(morgan('dev'));
 app.use(cors());
 dotenv.load();
 
+
+
 app.use(tokenGuard());
+
+app.use('/static', express.static(__dirname + '/public'));
 routers(app);
 
 

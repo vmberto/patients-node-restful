@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Sessions = sequelize.define('Sessions', {
+
+  const constructor = {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -11,17 +12,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    humour: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
-  }, {
-      underscored: true,
+  };
 
-    });
+  const options = { underscored: true }
+
+  const Sessions = sequelize.define('Sessions', constructor , options);
+
 
   Sessions.associate = function (models) {
     Sessions.belongsTo(models.Patients, { foreignKey: 'patients_id' });
+    Sessions.belongsTo(models.Humour, {foreignKey: 'humour_id'});
+
 
   };
   return Sessions;
