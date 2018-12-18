@@ -12,6 +12,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    attendance_at: {
+      type: DataTypes.DATE,
+      allowNull: false
+    }
   };
 
   const options = { underscored: true }

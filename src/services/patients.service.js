@@ -31,6 +31,7 @@ const PatientsService = {
         return db.Patients.create(
             {
                 name: params.name,
+                is_private: params.is_private,
                 health_insurance_id: params.health_insurance_id,
                 Contact: {
                     email: params.email,

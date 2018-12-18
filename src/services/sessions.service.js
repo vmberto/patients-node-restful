@@ -7,6 +7,7 @@ const SessionsService = {
         return db.Sessions.create({
             description: bodyParams.description,
             patients_id: id,
+            attendance_at: bodyParams.attendance_at,
             Humour: {
               title: bodyParams.humour_title,
             }
