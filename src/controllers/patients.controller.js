@@ -1,5 +1,5 @@
 
-const PatientsService = require('../services/patients.service');
+const patientsService = require('../services/patients.service');
 const healthInsurancesService = require('../services/health-insurance.service');
 const SessionsService = require('../services/sessions.service');
 
@@ -11,10 +11,10 @@ const PatientsController = {
 
             let params = req.query;
 
-            let patients = await PatientsService.getAllPatientsList(params);
+            let patients = await patientsService.getAllPatientsList(params);
 
 
-            params.total = await PatientsService.getPatientsTotalCount();
+            params.total = await patientsService.getPatientsTotalCount();
 
             const meta = {
                 paginationConfig: {
@@ -46,7 +46,7 @@ const PatientsController = {
         try {
             let params = req.params;
 
-            let patient = await PatientsService.getOnePatient(params.id)
+            let patient = await patientsService.getOnePatient(params.id)
 
 
             res.status(200).send(patient)
@@ -61,7 +61,7 @@ const PatientsController = {
         try {
 
 
-            const patientsTotalCount = await PatientsService.getPatientsTotalCount();
+            const patientsTotalCount = await patientsService.getPatientsTotalCount();
 
             let responseBundle = { data: patientsTotalCount }
 
@@ -78,7 +78,7 @@ const PatientsController = {
         try {
             let params = req.body;
 
-            const newPatient = await PatientsService.createPatient(params);
+            const newPatient = await patientsService.createPatient(params);
 
             const responseBundle = { newPatient }
 
@@ -94,7 +94,7 @@ const PatientsController = {
             const bodyParams = req.body;
             const urlParams = req.params;
 
-            const editedPatient = await PatientsService.editPatient(urlParams.id, bodyParams, 'name');
+            const editedPatient = await patientsService.editPatient(urlParams.id, bodyParams, 'name');
 
 
             res.status(200).json(editedPatient);
@@ -108,7 +108,7 @@ const PatientsController = {
         try {
             let params = req.params;
 
-            await PatientsService.deletePatient(params.id);
+            await patientsService.deletePatient(params.id);
 
             res.status(200).json({ deleted: `the patient ${params.id} was deleted` });
 

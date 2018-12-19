@@ -73,7 +73,7 @@
                     <div><span>Cidade Natal: </span>Paulo Afonso </div>
                 </td>
                 <td height="10" valign="top">
-                    <div><span>Telefone: </span> 81 998181213</div>
+                    <div><span>Telefone: </span> 81998181213</div>
                 </td>
             </tr>
             <tr>
@@ -88,13 +88,13 @@
 
         <div id="questions">
 
-            <% posts.forEach(function(post) { %>
+            <% questions.forEach(function(question) { %>
                 <p>
-                    <%= post.question %>
+                    <%= question.title %>
                 </p>
-                <% if (post.type == 0) { %>
+                <% if (question.type == 0) { %>
 
-                    <% post.options.forEach(function(option) { %> 
+                    <% question.options.forEach(function(option) { %> 
 
                         <div style="margin: 0; padding: 0; height: 10px; width: 10px; border: 1.8px solid black; display: inline-block;"></div>
                         <p style="display: inline-block;"><%= option %></p>
@@ -104,7 +104,7 @@
 
                 <% } else { %>
                     
-                    <% for(let i = 0; i < post.line_numbers; i++) { %> 
+                    <% for(let i = 0; i < question.line_number; i++) { %> 
 
                         <hr> 
                         

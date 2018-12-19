@@ -1,85 +1,59 @@
 const ejs = require('ejs');
 const fs = require('fs');
 const pdf = require('html-pdf');
+const anamnesisService = require('../services/anamnesis.service');
 
 const templateFile = './src/public/index.ejs';
 const filePath = './src/public/output/anamnesis.pdf';
 
 const PdfGeneratorService = {
 
-    async generatePdf(anamnesisName) {
+    async generatePdf() {
 
         await fs.access(filePath, error => {
             if (!error) {
-                fs.unlink(filePath, function (error) {
-                    console.log(error);
-                });
-            } else {
-                console.log(error);
-            }
+                fs.unlink(filePath, function (error) {});
+            } 
         });
 
-        let template = await this.htmlGenerator(templateFile, {
-            posts: [
-                {
-                    question: 'O que você faz?',
-                    type: 0,
-                    options: ['Danço', 'Rebolo', 'Vou até o Chão']
-                },
-                {
-                    question: 'O que te trouxe na terapia?',
-                    line_numbers: 3
-                },
-                {
-                    question: 'O que você gosta de fazer?',
-                    line_numbers: 8
-                },
-                {
-                    question: 'Para onde voce ja foi?',
-                    type: 0,
-                    options: ['Brasil', 'Portugal', 'Vou até o Chão']
-                },
-                {
-                    question: 'O que você faz?',
-                    line_numbers: 4,
-                    type: 0,
-                    options: ['Danço', 'Rebolo', 'Vou até o Chão']
-                },
-            ],
-            title: 'Maria de Lourdes'
-        });
+        let anamnesis = await anamnesisService.getOneAnamnesis(11);
 
-        await this.pdfGenerator(anamnesisName, template, { format: 'Letter' });
-    },
+        anamnesis = JSON.stringify(anamnesis);
+        anamnesis = JSON.parse(anamnesis);
+        
+        let template = await htmlGenerator(templateFile, {questions: anamnesis.AnamnesisQuestions});
 
-    htmlGenerator(templateFile, data) {
-
-        return new Promise(function (resolve, reject) {
-            ejs.renderFile(templateFile, data, function (err, html) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(html);
-                }
-            });
-        });
-
-    },
-
-    pdfGenerator(fileName, html, options) {
-
-        return new Promise(function (resolve, reject) {
-            pdf.create(html, options).toFile(`./src/public/output/${fileName}.pdf`, function (err, pdf) {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(pdf);
-                }
-            });
-        });
-
+        await pdfGenerator('anamnesis', template, { format: 'Letter' });
     }
 
 }
+
+function htmlGenerator(templateFile, data) {
+
+    return new Promise(function (resolve, reject) {
+        ejs.renderFile(templateFile, data, function (err, html) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(html);
+            }
+        });
+    });
+
+};
+
+function pdfGenerator(fileName, html, options) {
+
+    return new Promise(function (resolve, reject) {
+        pdf.create(html, options).toFile(`./src/public/output/${fileName}.pdf`, function (err, pdf) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(pdf);
+            }
+        });
+    });
+
+};
 
 module.exports = PdfGeneratorService;
