@@ -2,6 +2,7 @@
 const healthInsuranceRouter = require('./health-insurance.router');
 const userRouter = require('./user.router');
 const patientsRouter = require('./patients.router');
+const anamnesisRouter = require('./anamnesis.router');
 
 module.exports = function (app) {
 
@@ -10,11 +11,10 @@ module.exports = function (app) {
     
     app.use('/api/health-insurances', healthInsuranceRouter);
 
+    app.use('/api/anamnesis', anamnesisRouter);
+
     app.use('/', userRouter);
 
-    app.get('/', (res) => {
-        res.send('psic-api 2018')
-    });
 
 
 

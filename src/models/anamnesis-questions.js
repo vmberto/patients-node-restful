@@ -2,12 +2,6 @@
 module.exports = (sequelize, DataTypes) => {
 
   const AnamnesisQuestion = sequelize.define('AnamnesisQuestion', {
-    id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-      allowNull: false
-    },
     title: {
       type: DataTypes.STRING,
       allowNull: false
@@ -16,21 +10,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    options: {
-      type: DataTypes.STRING,
-      allowNull: true
-    },
-    anamnesis_id: {
+    line_number: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
   },
     {
+      freezeTableName: true,
       underscored: true,
     });
 
   AnamnesisQuestion.associate = function (models) {
     AnamnesisQuestion.belongsTo(models.Anamnesis, { foreignKey: 'anamnesis_id' });
   };
+
   return AnamnesisQuestion;
 };

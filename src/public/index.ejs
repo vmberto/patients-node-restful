@@ -2,18 +2,47 @@
 <html lang="en">
 
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Aleo:400,700" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Document</title>
 
     <style>
+        
         @page {
             size: A4;
             margin: 0;
         }
 
-        html { padding: 15px; margin: 0 }
-        hr { margin-top: 30px; }
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Aleo', serif;
+        }
+
+        .container {
+            height: 388vh;
+            border: 2px solid black;
+            padding: 40px;
+        }
+
+        hr {
+            margin-top: 30px;
+        }
+
+        div,
+        span {
+            word-break: break-all;
+            font-size: 26px;
+        }
+
+        div span {
+            font-weight: bold;
+        }
+
     </style>
 
 </head>
@@ -22,20 +51,77 @@
 
     <div class="container">
 
-        <img src="/header.jpg" />
+        <img src="http://localhost:5000/static/images/header.png" />
 
-        <h1>
-            <%= title %>
-        </h1>
 
-        <p>Qual é o seu nome?</p>
-        <hr>
-        <hr>
-        <hr>
+        <table width="100%" cellpadding="0" cellspacing="10" border="0">
+            <tr>
+                <td height="10" valign="top">
+                    <div><span>Nome: </span>Maria de Lourdes </div>
+                </td>
+                <td height="10" valign="top">
+                    <div><span>Data de Nascimento: </span>21/06/1969 </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="10" valign="top">
+                    <div><span>Endereço: </span>Rua Abreu e General Domingos Ferreira, 145</div>
+                </td>
+            </tr>
+            <tr>
+                <td height="10" valign="top">
+                    <div><span>Cidade Natal: </span>Paulo Afonso </div>
+                </td>
+                <td height="10" valign="top">
+                    <div><span>Telefone: </span> 81 998181213</div>
+                </td>
+            </tr>
+            <tr>
+                <td height="10" valign="top">
+                    <div><span>Profissão: </span>Programadora </div>
+                </td>
+                <td height="10" valign="top">
+                    <div><span>Encaminhado por: </span> Drª. Renata Vasconcelos</div>
+                </td>
+            </tr>
+        </table>
+
+        <div id="questions">
+
+            <% posts.forEach(function(post) { %>
+                <p>
+                    <%= post.question %>
+                </p>
+                <% if (post.type == 0) { %>
+
+                    <% post.options.forEach(function(option) { %> 
+
+                        <div style="margin: 0; padding: 0; height: 10px; width: 10px; border: 1.8px solid black; display: inline-block;"></div>
+                        <p style="display: inline-block;"><%= option %></p>
+                        
+                    <% }); %>
+
+
+                <% } else { %>
+                    
+                    <% for(let i = 0; i < post.line_numbers; i++) { %> 
+
+                        <hr> 
+                        
+                    <% } %>
+
+                <% } %>
+                <br>
+            <% }); %>
+
+        </div>
+
+
 
     </div>
 
 
 </body>
+
 
 </html>

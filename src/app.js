@@ -32,11 +32,10 @@ const port = process.env.SERVER_PORT;
 const PdfGeneratorService = require('./services/pdf-generator.service');
 
 app.get('/pdf', (res, req, next) => {
-    const serv = new PdfGeneratorService();
-    serv.generatePdf('anamnesis');
+    PdfGeneratorService.generatePdf('anamnesis');
     next();
 });
-app.set('views', './views');
+app.set('views', './public/output');
 app.set('view engine', 'ejs');
 //===========================================================================
 
