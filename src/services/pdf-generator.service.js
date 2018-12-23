@@ -45,7 +45,7 @@ function htmlGenerator(templateFile, data) {
 function pdfGenerator(fileName, html, options) {
 
     return new Promise(function (resolve, reject) {
-        pdf.create(html, options).toFile(`./src/public/output/${fileName}123.pdf`, function (err, pdf) {
+        pdf.create(html, options).toFile(`./src/public/output/${fileName}.pdf`, function (err, pdf) {
             if (err) {
                 reject(err);
             } else {
