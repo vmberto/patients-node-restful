@@ -21,7 +21,7 @@ fs
   });
 
 folders.forEach(folder => {
-  const currentFolder = `${__dirname}\\${folder}`;
+  const currentFolder = `${__dirname}/${folder}`;
   
   fs.readdirSync(currentFolder)
     .forEach(file => {
