@@ -32,7 +32,7 @@ const PatientsService = {
             {
                 name: params.name,
                 is_private: params.is_private,
-                health_insurance_id: params.health_insurance_id ? params.health_insurance : null,
+                health_insurance_id: params.health_insurance_id ? params.health_insurance_id : null,
                 Contact: {
                     email: params.email,
                     phone: params.phone,

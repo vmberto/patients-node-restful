@@ -40,6 +40,7 @@ const AnamnesisController = {
     async getOneAnamnesis(req, res) {
 
         try {
+            
             let params = req.params;
 
             let anamnesis = await anamnesisService.getOneAnamnesis(params.id)
@@ -59,7 +60,7 @@ const AnamnesisController = {
 
             const newAnamnesis = await anamnesisService.createAnamnesis(bodyParams);
 
-            const responseBundle = { newAnamnesis }
+            const responseBundle = newAnamnesis;
 
             res.status(200).json(responseBundle);
 
@@ -75,7 +76,7 @@ const AnamnesisController = {
 
             const newQuestion = await anamnesisService.createAnamnesisQuestion(anamnesisId, bodyParams);
 
-            const responseBundle = { newQuestion, anamnesis_id: anamnesisId };
+            const responseBundle = newQuestion;
 
             res.status(200).json(responseBundle);
 
@@ -98,6 +99,8 @@ const AnamnesisController = {
             res.send(file);
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send(err);
         }
 

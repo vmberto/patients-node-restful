@@ -8,7 +8,7 @@ const AnamnesisService = {
     getAllAnamnesis(queryParams) {
         let queryBuilder = listQueryBuilder(queryParams);
 
-        queryBuilder.include = [db.AnamnesisQuestion];
+        queryBuilder.include = [{ model: db.AnamnesisQuestion, as: 'questions'}];
 
         return db.Anamnesis.findAndCountAll(queryBuilder);
     },
@@ -19,17 +19,14 @@ const AnamnesisService = {
 
     getOneAnamnesis(id) {
         return db.Anamnesis
-            .findByPk(id, { include: [db.AnamnesisQuestion] });
+            .findByPk(id, { include: [{model: db.AnamnesisQuestion, as: 'questions'}] });
 
     },
     
     createAnamnesis(bodyParams) {
 
         return db.Anamnesis.create({
-            name: bodyParams.name,
-            AnamnesisQuestions: []
-          }, {
-            include: [ db.AnamnesisQuestion ]
+            name: bodyParams.name
           });
 
     },

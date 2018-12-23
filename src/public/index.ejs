@@ -25,7 +25,7 @@
 
         .container {
             height: 388vh;
-            border: 2px solid black;
+            /* border: 2px solid black; */
             padding: 40px;
         }
 
@@ -57,35 +57,38 @@
         <table width="100%" cellpadding="0" cellspacing="10" border="0">
             <tr>
                 <td height="10" valign="top">
-                    <div><span>Nome: </span>Maria de Lourdes </div>
+                    <div><span>Nome: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %> </div>
                 </td>
                 <td height="10" valign="top">
-                    <div><span>Data de Nascimento: </span>21/06/1969 </div>
+                    <div><span>Data de Nascimento: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %> </div>
                 </td>
             </tr>
             <tr>
                 <td colspan="2" height="10" valign="top">
-                    <div><span>Endereço: </span>Rua Abreu e General Domingos Ferreira, 145</div>
+                    <div><span>Endereço: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %></div>
                 </td>
             </tr>
             <tr>
                 <td height="10" valign="top">
-                    <div><span>Cidade Natal: </span>Paulo Afonso </div>
+                    <div><span>Cidade Natal: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <hr> <% } %></div>
                 </td>
                 <td height="10" valign="top">
-                    <div><span>Telefone: </span> 81998181213</div>
+                    <div><span>Telefone: </span> <% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %></div>
                 </td>
             </tr>
             <tr>
                 <td height="10" valign="top">
-                    <div><span>Profissão: </span>Programadora </div>
+                    <div><span>Profissão: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %> </div>
                 </td>
                 <td height="10" valign="top">
-                    <div><span>Encaminhado por: </span> Drª. Renata Vasconcelos</div>
+                    <div><span>Encaminhado por: </span> <% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %></div>
                 </td>
             </tr>
         </table>
 
+        <br>
+        <br>
+        
         <div id="questions">
 
             <% questions.forEach(function(question) { %>

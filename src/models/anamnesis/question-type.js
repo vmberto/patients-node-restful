@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     });
 
-    QuestionType.associate = function (models) {
+  QuestionType.associate = function (models) {
   };
   return QuestionType;
 };
