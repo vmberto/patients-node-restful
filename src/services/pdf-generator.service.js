@@ -21,7 +21,15 @@ const PdfGeneratorService = {
         anamnesis = JSON.stringify(anamnesis);
         anamnesis = JSON.parse(anamnesis);
         
-        let template = await htmlGenerator(templateFile, { patientData: {}, questions: anamnesis.questions, credentials: { token: payload.token } });
+        const options =  {
+            patientData: {},
+            questions: anamnesis.questions,
+            config: { token: payload.token, base_url:  process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : `http://localhost:${process.env.SERVER_PORT || 5000}`}
+         }
+         console.log(options);
+         
+
+        let template = await htmlGenerator(templateFile, options);
 
         await pdfGenerator('anamnesis', template, { format: 'Letter' });
     }
