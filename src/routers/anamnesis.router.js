@@ -8,7 +8,11 @@ anamnesisRouter.get('/:id', anamnesisController.getOneAnamnesis);
 
 anamnesisRouter.post('/', anamnesisController.postCreateAnamensis);
 
+anamnesisRouter.delete('/:id/delete', anamnesisController.deleteAnamnesis);
+
 anamnesisRouter.post('/new-question/:id', anamnesisController.postCreateAnamnesisQuestion);
+
+anamnesisRouter.delete('/delete-question/:id', anamnesisController.deleteAnamnesisQuestion);
 
 anamnesisRouter.get('/download/:id', anamnesisController.pdfgenerate);
 

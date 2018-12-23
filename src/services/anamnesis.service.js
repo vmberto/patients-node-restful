@@ -31,6 +31,14 @@ const AnamnesisService = {
 
     },
 
+    deleteAnamnesis(id) {
+
+        return db.Anamnesis.destroy({
+            where: { id }
+        });
+
+    },
+
     createAnamnesisQuestion(id, bodyParams) {
 
         return db.AnamnesisQuestion.create({
@@ -38,6 +46,12 @@ const AnamnesisService = {
             title: bodyParams.question,
             type: bodyParams.type,
             line_number: bodyParams.line_number
+        });
+    },
+
+    deleteAnamnesisQuestion(id) {
+        return db.AnamnesisQuestion.destroy({
+            where: { id }
         });
     }
 

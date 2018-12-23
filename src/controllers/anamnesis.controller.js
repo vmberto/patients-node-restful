@@ -69,6 +69,21 @@ const AnamnesisController = {
         }
     },
 
+    async deleteAnamnesis(req, res) {
+
+        try {
+            let params = req.params;
+
+            await anamnesisService.deleteAnamnesis(params.id);
+
+            res.status(200).json({ deleted: `A anamnese ${params.id} foi excluída` });
+
+        } catch (err) {
+            res.status(400).send(err);
+        }
+
+    },
+
     async postCreateAnamnesisQuestion(req, res) {
         try {
             let anamnesisId = req.params.id;
@@ -85,13 +100,28 @@ const AnamnesisController = {
         }
     },
 
+    async deleteAnamnesisQuestion(req, res) {
+
+        try {
+            let params = req.params;
+            
+            await anamnesisService.deleteAnamnesisQuestion(params.id);
+    
+            res.status(200).json({deleted: `A pergunta ${params.id} foi excluída`});
+    
+        }catch (err){
+            res.status(400).send(err);
+        }
+
+
+    },
+
     async pdfgenerate(req, res) {
         try {
             const anamnesisId = req.params.id;
 
             payload = {id: anamnesisId, token: req.headers.authorization}
             
-
             await PdfGeneratorService.generatePdf(payload);
     
             let file = fs.readFileSync('src/public/output/anamnesis.pdf');
@@ -100,13 +130,9 @@ const AnamnesisController = {
             res.setHeader('Content-Type', "application/pdf");
             res.setHeader('Content-Disposition', 'pdf; filename=' + `${filename}.pdf`);
 
-            // file = JSON.stringify(file);
-
             res.send(file);
 
         } catch (err) {
-            console.log(err);
-            
             res.status(400).send(err);
         }
 

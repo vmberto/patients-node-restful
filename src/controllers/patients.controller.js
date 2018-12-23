@@ -104,7 +104,7 @@ const PatientsController = {
         }
 
     },
-    async postDeletePatient(req, res) {
+    async deletePatient(req, res) {
         try {
             let params = req.params;
 

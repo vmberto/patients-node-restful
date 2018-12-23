@@ -12,7 +12,7 @@ patientsRouter.get('/:id', patientsController.getOnePatient);
 
 patientsRouter.put('/:id/edit', patientsController.postEditPatient);
 
-patientsRouter.delete('/:id/delete', patientsController.postDeletePatient);
+patientsRouter.delete('/:id/delete', patientsController.deletePatient);
 
 patientsRouter.post('/:id/create-session', patientsController.postCreatePatientSession);
 
