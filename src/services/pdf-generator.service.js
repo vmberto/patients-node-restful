@@ -8,7 +8,7 @@ const filePath = './src/public/output/anamnesis.pdf';
 
 const PdfGeneratorService = {
 
-    async generatePdf(id) {
+    async generatePdf(payload) {
 
         await fs.access(filePath, error => {
             if (!error) {
@@ -16,12 +16,12 @@ const PdfGeneratorService = {
             } 
         });
 
-        let anamnesis = await anamnesisService.getOneAnamnesis(id);
+        let anamnesis = await anamnesisService.getOneAnamnesis(payload.id);
 
         anamnesis = JSON.stringify(anamnesis);
         anamnesis = JSON.parse(anamnesis);
         
-        let template = await htmlGenerator(templateFile, {patientData: {}, questions: anamnesis.questions});
+        let template = await htmlGenerator(templateFile, { patientData: {}, questions: anamnesis.questions, credentials: { token: payload.token } });
 
         await pdfGenerator('anamnesis', template, { format: 'Letter' });
     }
