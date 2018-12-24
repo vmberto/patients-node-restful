@@ -14,11 +14,15 @@
             padding: 0;
         }
 
+        a {
+            text-decoration: none;
+        }
+
         body {
+            font-family: 'Aleo', serif;
         }
 
         .container {
-            height: 388vh;
             padding: 40px;
         }
 
@@ -29,7 +33,7 @@
         div,
         span {
             word-break: break-all;
-            font-size: 23px;
+            font-size: 12px;
         }
 
         div span {
@@ -49,7 +53,7 @@
         <table width="100%" cellpadding="0" cellspacing="10" border="0">
             <tr>
                 <td height="10" valign="top">
-                    <div><span>Nome: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %> </div>
+                    <div><span>Nome: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <a>_________________</a> <% } %> </div>
                 </td>
                 <td height="10" valign="top">
                     <div><span>Data de Nascimento: </span><% if (patientData) { %> <%= patientData.name %> <% } else { %> <%= '_____________' %> <% } %> </div>
