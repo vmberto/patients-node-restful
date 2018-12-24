@@ -46,7 +46,7 @@ const AnamnesisService = {
             title: bodyParams.question,
             type: bodyParams.type,
             line_number: bodyParams.line_number,
-            options: [{ title: 'Opção 1' }, { title: 'Opção 2' }]
+            options: bodyParams.options
         }, {
                 include: [{ model: db.QuestionOptions, as: 'options' }]
             });
