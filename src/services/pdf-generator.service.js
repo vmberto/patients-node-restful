@@ -18,16 +18,12 @@ const PdfGeneratorService = {
 
         let anamnesis = await anamnesisService.getOneAnamnesis(payload.id);
 
-        anamnesis = JSON.stringify(anamnesis);
-        anamnesis = JSON.parse(anamnesis);
-        
-        const options =  {
+        const options = {
             patientData: {},
             questions: anamnesis.questions,
-            config: { token: payload.token, base_url:  process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : `http://localhost:${process.env.SERVER_PORT || 5000}`}
-         }
-         console.log(options);
-         
+            config: { token: payload.token, base_url:  process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
+        }
+
 
         let template = await htmlGenerator(templateFile, options);
 
