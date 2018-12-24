@@ -96,6 +96,8 @@ const AnamnesisController = {
             res.status(200).json(responseBundle);
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send(err);
         }
     },
@@ -133,6 +135,8 @@ const AnamnesisController = {
             res.send(file);
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send(err);
         }
 

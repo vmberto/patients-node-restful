@@ -19,15 +19,15 @@ const AnamnesisService = {
 
     getOneAnamnesis(id) {
         return db.Anamnesis
-            .findByPk(id, { include: [{model: db.AnamnesisQuestion, as: 'questions'}] });
+            .findByPk(id, { include: [{ model: db.AnamnesisQuestion, as: 'questions', include: [{ model: db.QuestionOptions, as: 'options' }]  }] });
 
     },
-    
+
     createAnamnesis(bodyParams) {
 
         return db.Anamnesis.create({
             name: bodyParams.name
-          });
+        });
 
     },
 
@@ -45,8 +45,11 @@ const AnamnesisService = {
             anamnesis_id: id,
             title: bodyParams.question,
             type: bodyParams.type,
-            line_number: bodyParams.line_number
-        });
+            line_number: bodyParams.line_number,
+            options: [{ title: 'Opção 1' }, { title: 'Opção 2' }]
+        }, {
+                include: [{ model: db.QuestionOptions, as: 'options' }]
+            });
     },
 
     deleteAnamnesisQuestion(id) {
