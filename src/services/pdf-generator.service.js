@@ -28,6 +28,7 @@ const PdfGeneratorService = {
         let template = await htmlGenerator(templateFile, options);
 
         await pdfGenerator('anamnesis', template, { format: 'Letter' });
+
     }
 
 }
