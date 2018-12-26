@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:pm2": "npm update && pm2 start src/app.js --name node-rest -- --color --watch --log-date-format=\"YYYY-MM-DD HH:mm:ss\" && pm2 log",
     
+    "config": "sequelize db:seed:all",
+
     "dev": "SERVER_PORT=5000 nodemon src/app.js",
     "prod": "NODE_ENV='production' node src/app.js",
     
