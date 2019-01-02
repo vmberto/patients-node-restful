@@ -12,22 +12,32 @@ const PdfGeneratorService = {
 
         await fs.access(filePath, error => {
             if (!error) {
-                fs.unlink(filePath, function (error) {});
-            } 
+                fs.unlink(filePath, function (error) { });
+            }
         });
-
+        
         let anamnesis = await anamnesisService.getOneAnamnesis(payload.id);
 
         const options = {
             patientData: {},
             questions: anamnesis.questions,
-            config: { token: payload.token, base_url:  process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
+            config: { token: payload.token, base_url: process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
         }
 
 
         let template = await htmlGenerator(templateFile, options);
 
-        await pdfGenerator('anamnesis', template, { format: 'Letter' });
+        await pdfGenerator('anamnesis', template, {
+            format: 'A4',
+            orientation: 'portrait',
+            border: {
+                "top": "1.5cm",            // default is 0, units: mm, cm, in, px
+                "right": "1.4cm",
+                "bottom": "1.5cm",
+                "left": "1.4cm"
+            }
+
+        });
 
     }
 
