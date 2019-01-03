@@ -20,7 +20,7 @@ dotenv.load();
 
 app.use(tokenGuard());
 
-app.use('/static', express.static(__dirname + '/public'));
+app.use('/static', express.static(__dirname + '/src/public'));
 routers(app);
 
 
