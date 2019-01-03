@@ -15,11 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     is_private: {
       type: DataTypes.BOOLEAN,
       allowNull: false
+    },
+    forwarded_by: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
-  },
-    {
-      underscored: true,
-    });
+  });
 
   Patients.associate = function (models) {
     Patients.belongsTo(models.HealthInsurance, {foreignKey: 'health_insurance_id'});

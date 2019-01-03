@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
-const routers = require('./routers');
-const tokenGuard = require('./middlewares/token-guard');
+const routers = require('./src/routers');
+const tokenGuard = require('./src/middlewares/token-guard');
 
 const app = express();
 
