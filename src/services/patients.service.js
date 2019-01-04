@@ -10,7 +10,9 @@ const PatientsService = {
         queryBuilder.include = [{ model: db.HealthInsurance }];
 
         if (queryParams.health_insurance) {
-            queryBuilder.include[0].where = { id: queryParams.health_insurance }
+            if(!queryBuilder.where) queryBuilder.where = {};
+
+            queryBuilder.where.health_insurance_id = queryParams.health_insurance == -1 ? null : queryParams.health_insurance;
         }
 
 

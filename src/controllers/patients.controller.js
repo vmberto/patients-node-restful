@@ -26,7 +26,7 @@ const PatientsController = {
                     "links": {},
                 },
                 filterConfig: {
-                    "health_insurances": await healthInsurancesService.getAllHealthInsurances()
+                    "health_insurances": [ {id: -1, name: 'Nenhum'}, ...await healthInsurancesService.getAllHealthInsurances() ]
 
                 }
 
