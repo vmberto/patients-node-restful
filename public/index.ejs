@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://use.typekit.net/inw2mil.css">
+
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            font-family: ivyjournal, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 12px;
+        }
+
+        hr {
+            margin-top: 20px;
+        }
+
+        div,
+        span,
+        p {
+            word-wrap: break-word;
+            text-align: justify;
+        }
+
+        div span {
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <table style="margin-bottom: 15px;">
+            <td style="text-align: center;">
+                <img src="<%=config.base_url%>/static/images/header.png?authorization=<%= config.token %>" />
+            </td>
+        </table>
+
+
+        <table>
+            <tr>
+                <td height="25" valign="top">
+                    <div>
+                        <span>Nome: </span>
+                        <% if (patientData && patientData.name) { %>
+
+                        <p style="display: inline-block;">
+                            <%= patientData.name %>
+                        </p>
+
+                        <% } else { %>
+
+                        <div style="display: inline-block; width: 240px; border-bottom: 1px solid #818181;"></div>
+
+                        <% } %>
+                    </div>
+                </td>
+                <td height="25" valign="top">
+                    <div>
+                        <span>Nascimento: </span>
+                        <% if (patientData && patientData.name) { %>
+
+                        <p style="display: inline-block;">
+                            <%= patientData.name %>
+                        </p>
+
+                        <% } else { %>
+
+                        <div style="display: inline-block; width: 100px; border-bottom: 1px solid #818181"></div>
+
+                        <% } %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" height="25" valign="top">
+                    <span>Endereço: </span>
+                    <% if (patientData && patientData.name) { %>
+
+                    <p style="display: inline-block;">
+                        <%= patientData.name %>
+                    </p>
+
+                    <% } else { %>
+
+                    <div style="display: inline-block; width: 420px; border-bottom: 1px solid #818181"></div>
+
+                    <% } %>
+                </td>
+            </tr>
+            <tr>
+                <td height="25" valign="top">
+                    <div>
+                        <span>Cidade Natal: </span>
+                        <% if (patientData && patientData.name) { %>
+
+                        <p style="display: inline-block;">
+                            <%= patientData.name %>
+                        </p>
+
+                        <% } else { %>
+
+                        <div style="display: inline-block; width: 186.8px; border-bottom: 1px solid #818181"></div>
+
+                        <% } %>
+                    </div>
+                </td>
+                <td height="25" valign="top">
+                    <div>
+                        <span>Telefone: </span>
+                        <% if (patientData && patientData.name) { %>
+
+                        <p style="display: inline-block;">
+                            <%= patientData.name %>
+                        </p>
+
+                        <% } else { %>
+
+                        <div style="display: inline-block; width: 128.5px; border-bottom: 1px solid #818181"></div>
+
+                        <% } %>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="25" valign="top">
+                    <div>
+                        <span>Profissão: </span>
+                        <% if (patientData && patientData.name) { %>
+
+                        <p style="display: inline-block;">
+                            <%= patientData.name %>
+                        </p>
+
+                        <% } else { %>
+
+                        <div style="display: inline-block; width: 206.5px; border-bottom: 1px solid #818181"></div>
+
+                        <% } %>
+                    </div>
+                </td>
+                <td height="25" valign="top">
+                    <div>
+                        <span>Encaminhado por: </span>
+
+                        <% if (patientData && patientData.name) { %>
+
+                        <p style="display: inline-block;">
+                            <%= patientData.name %>
+                        </p>
+
+                        <% } else { %>
+
+                        <div style="display: inline-block; width: 75px; border-bottom: 1px solid #818181"></div>
+
+                        <% } %>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+        <% questions.forEach(function(question) { %>
+        <table style="margin-top: 25px;">
+            <tr>
+                <table id="questions">
+                    <tr>
+                        <td>
+                            <h4>
+                                <%= question.title %>
+                            </h4>
+                        </td>
+                    </tr>
+
+                </table>
+            </tr>
+
+            <% if (question.type == 0) { %>
+            <tr>
+                <table id="options">
+
+                    <tr>
+                        <% question.options.forEach(function(option) { %>
+                        <td>
+                            <div style="margin: 0; padding: 0; height: 10px; width: 10px; border: 1px solid black; display: inline-block;"></div>
+                            <p style="display: inline-block;">
+                                <%= option.title %>
+                            </p>
+                        </td>
+                        <% }); %>
+                    </tr>
+
+                </table>
+            </tr>
+            <% } %>
+
+            <tr>
+                <table id="lines">
+                    <% for(let i = 0; i < question.line_number; i++) { %>
+                    <tr>
+                        <hr>
+                    </tr>
+                    <% } %>
+                </table>
+            </tr>
+
+        </table>
+
+        <% }); %>
+
+    </div>
+
+
+</body>
+
+
+</html>
