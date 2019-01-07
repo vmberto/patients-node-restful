@@ -7,12 +7,20 @@ const PatientsService = {
 
         let queryBuilder = listQueryBuilder(queryParams);
 
-        queryBuilder.include = [{ model: db.HealthInsurance }];
+        queryBuilder.include = [{ model: db.HealthInsurance }, { model: db.PatientStatus }];
 
         if (queryParams.health_insurance) {
-            if (!queryBuilder.where) queryBuilder.where = {};
-            queryBuilder.where = { health_insurance_id: queryParams.health_insurance == -1 ? null : queryParams.health_insurance }
+            if (!queryBuilder.where) queryBuilder.where = [];
+            queryBuilder.where.push({ health_insurance_id: queryParams.health_insurance == -1 ? null : queryParams.health_insurance });
         }
+
+        if(queryParams.patient_status) {
+            if (!queryBuilder.where) queryBuilder.where = [];
+            queryBuilder.where.push({ patient_status_id: queryParams.patient_status });
+        }
+
+        console.log(queryBuilder);
+        
 
 
         return db.Patients.findAndCountAll(queryBuilder);
@@ -34,6 +42,7 @@ const PatientsService = {
                 name: params.name,
                 is_private: params.is_private,
                 health_insurance_id: params.health_insurance_id ? params.health_insurance_id : null,
+                patient_status_id: 1,
                 Contact: {
                     email: params.email,
                     phone: params.phone,

@@ -112,6 +112,7 @@ const AnamnesisController = {
             res.status(200).json({deleted: `A pergunta ${params.id} foi excluída`});
     
         }catch (err){
+            
             res.status(400).send(err);
         }
 
@@ -126,7 +127,7 @@ const AnamnesisController = {
             
             await PdfGeneratorService.generatePdf(payload);
     
-            let file = fs.readFileSync('./public/output/anamnesis.pdf');
+            let file = fs.readFileSync('./static/output/anamnesis.pdf');
             const filename = 'anamnese';
     
             res.setHeader('Content-Type', "application/pdf");
@@ -135,6 +136,8 @@ const AnamnesisController = {
             res.send(file);
 
         } catch (err) {
+            console.log(err);
+
             res.status(400).send(err);
         }
 

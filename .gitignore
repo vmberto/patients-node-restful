@@ -61,4 +61,4 @@ typings/
 .next
 
 # directories
-src/public/output/*
+src/static/output/*

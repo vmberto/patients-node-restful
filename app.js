@@ -15,7 +15,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.set('view engine', 'ejs');
 dotenv.load();
-app.use('/public', express.static(__dirname + '/public'));
+app.use('/static', express.static('./static'));
 
 
 

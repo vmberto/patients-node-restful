@@ -129,7 +129,7 @@ const PatientsController = {
             res.status(200).json(responseBundle);
 
         } catch (err) {
-            res.status(400).send(err);
+            res.status(400).send({error: true, message: "Não foi possível criar a sessão"});
         }
     }
 
