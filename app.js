@@ -15,12 +15,12 @@ app.use(morgan('dev'));
 app.use(cors());
 app.set('view engine', 'ejs');
 dotenv.load();
+app.use('/public', express.static(__dirname + '/public'));
 
 
 
 app.use(tokenGuard());
 
-app.use('/static', express.static(__dirname + '/src/public'));
 routers(app);
 
 
