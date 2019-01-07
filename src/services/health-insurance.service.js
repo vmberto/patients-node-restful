@@ -2,11 +2,11 @@ const db = require("../models/index.js");
 
 const HealthInsurancesSerivce = {
 
-    getAllHealthInsurances() {
+    findAllHealthInsurances() {
         return db.HealthInsurance.findAll({ include: [{ model: db.Patients }] });
     },
 
-    getHealthInsurancePatientsRelation() {
+    findAllHealthInsurancePatientsRelation() {
         return db.HealthInsurance.findAll({
             attributes: ['name'], include: [
                 {

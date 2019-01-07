@@ -3,26 +3,27 @@ const db = require("../models/index.js");
 
 const PatientsService = {
 
-    getAllPatientsList(queryParams) {
+    findAndCountAllPatients(queryParams) {
 
         let queryBuilder = listQueryBuilder(queryParams);
 
         queryBuilder.include = [{ model: db.HealthInsurance }];
 
         if (queryParams.health_insurance) {
-            queryBuilder.include[0].where = { id: queryParams.health_insurance }
+            if (!queryBuilder.where) queryBuilder.where = {};
+            queryBuilder.where = { health_insurance_id: queryParams.health_insurance == -1 ? null : queryParams.health_insurance }
         }
 
 
         return db.Patients.findAndCountAll(queryBuilder);
     },
 
-    getOnePatient(id) {
+    findPatient(id) {
         return db.Patients
             .findByPk(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }, { model: db.Sessions, include: [{ model: db.Humour }] }] });
     },
 
-    getPatientsTotalCount() {
+    countPatients() {
         return db.Patients.count()
     },
 

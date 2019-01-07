@@ -5,7 +5,7 @@ const db = require("../models/index.js");
 
 const AnamnesisService = {
 
-    getAllAnamnesis(queryParams) {
+    findAllAnamnesis(queryParams) {
         let queryBuilder = listQueryBuilder(queryParams);
 
         queryBuilder.include = [{ model: db.AnamnesisQuestion, as: 'questions'}];
@@ -13,11 +13,11 @@ const AnamnesisService = {
         return db.Anamnesis.findAndCountAll(queryBuilder);
     },
 
-    getAnamnesisTotalCount() {
+    countAnamnesis() {
         return db.Anamnesis.count()
     },
 
-    getOneAnamnesis(id) {
+    findAnamnesis(id) {
         return db.Anamnesis
             .findByPk(id, { include: [{ model: db.AnamnesisQuestion, as: 'questions', include: [{ model: db.QuestionOptions, as: 'options' }]  }] });
 

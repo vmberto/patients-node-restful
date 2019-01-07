@@ -11,10 +11,10 @@ const PatientsController = {
 
             let params = req.query;
 
-            let patients = await patientsService.getAllPatientsList(params);
+            let patients = await patientsService.findAndCountAllPatients(params);
 
 
-            params.total = await patientsService.getPatientsTotalCount();
+            params.total = await patientsService.countPatients();
 
             const meta = {
                 paginationConfig: {
@@ -26,7 +26,7 @@ const PatientsController = {
                     "links": {},
                 },
                 filterConfig: {
-                    "health_insurances": await healthInsurancesService.getAllHealthInsurances()
+                    "health_insurances": [...await healthInsurancesService.findAllHealthInsurances(), { id: -1, name: 'Nenhum' }]
 
                 }
 
@@ -46,7 +46,7 @@ const PatientsController = {
         try {
             let params = req.params;
 
-            let patient = await patientsService.getOnePatient(params.id)
+            let patient = await patientsService.findPatient(params.id)
 
 
             res.status(200).send(patient)
@@ -61,7 +61,7 @@ const PatientsController = {
         try {
 
 
-            const patientsTotalCount = await patientsService.getPatientsTotalCount();
+            const patientsTotalCount = await patientsService.countPatients();
 
             let responseBundle = { data: patientsTotalCount }
 
