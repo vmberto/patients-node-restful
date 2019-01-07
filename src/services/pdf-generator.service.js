@@ -3,8 +3,8 @@ const fs = require('fs');
 const pdf = require('html-pdf');
 const anamnesisService = require('../services/anamnesis.service');
 
-const templateFile = './src/public/index.ejs';
-const filePath = './src/public/output/anamnesis.pdf';
+const templateFile = './public/index.ejs';
+const filePath = './public/output/anamnesis.pdf';
 
 const PdfGeneratorService = {
 
@@ -60,7 +60,7 @@ function htmlGenerator(templateFile, data) {
 function pdfGenerator(fileName, html, options) {
 
     return new Promise(function (resolve, reject) {
-        pdf.create(html, options).toFile(`./src/public/output/${fileName}.pdf`, function (err, pdf) {
+        pdf.create(html, options).toFile(`./public/output/${fileName}.pdf`, function (err, pdf) {
             if (err) {
                 reject(err);
             } else {

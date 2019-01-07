@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     forwarded_by: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   });
 

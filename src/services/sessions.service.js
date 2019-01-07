@@ -8,9 +8,7 @@ const SessionsService = {
             description: bodyParams.description,
             patients_id: id,
             attendance_at: bodyParams.attendance_at,
-            Humour: {
-              title: bodyParams.humour_title,
-            }
+            humour_id: bodyParams.humour_id
           }, {
             include: [ db.Humour ]
           });

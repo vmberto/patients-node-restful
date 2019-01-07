@@ -126,7 +126,7 @@ const AnamnesisController = {
             
             await PdfGeneratorService.generatePdf(payload);
     
-            let file = fs.readFileSync('src/public/output/anamnesis.pdf');
+            let file = fs.readFileSync('./public/output/anamnesis.pdf');
             const filename = 'anamnese';
     
             res.setHeader('Content-Type', "application/pdf");
