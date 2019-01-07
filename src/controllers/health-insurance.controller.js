@@ -7,7 +7,7 @@ const HealthInsuranceController = {
 
         try {
     
-            let healthInsurances = await healthInsurancesService.getAllHealthInsurances();
+            let healthInsurances = await healthInsurancesService.findAllHealthInsurances();
     
             let responseBundle = { data: healthInsurances }
     
@@ -22,7 +22,7 @@ const HealthInsuranceController = {
 
         try {
     
-            let healthInsurances = await healthInsurancesService.getHealthInsurancePatientsRelation();
+            let healthInsurances = await healthInsurancesService.findAllHealthInsurancePatientsRelation();
     
             let responseBundle = { data: healthInsurances }
     

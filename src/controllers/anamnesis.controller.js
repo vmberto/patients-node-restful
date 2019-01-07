@@ -12,9 +12,9 @@ const AnamnesisController = {
 
             let params = req.query;
 
-            let anamnesis = await anamnesisService.getAllAnamnesis(params);
+            let anamnesis = await anamnesisService.findAllAnamnesis(params);
 
-            params.total = await anamnesisService.getAnamnesisTotalCount();
+            params.total = await anamnesisService.countAnamnesis();
 
             const meta = {
                 paginationConfig: {
@@ -43,7 +43,7 @@ const AnamnesisController = {
             
             let params = req.params;
 
-            let anamnesis = await anamnesisService.getOneAnamnesis(params.id)
+            let anamnesis = await anamnesisService.findAnamnesis(params.id)
 
             res.status(200).send(anamnesis)
 
