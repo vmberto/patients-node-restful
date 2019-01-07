@@ -19,9 +19,6 @@ const PatientsService = {
             queryBuilder.where.push({ patient_status_id: queryParams.patient_status });
         }
 
-        console.log(queryBuilder);
-        
-
 
         return db.Patients.findAndCountAll(queryBuilder);
     },

@@ -3,8 +3,8 @@ let listQueryBuilder = function (params) {
     const listQuery = {};
 
     if (params.search) {
-        listQuery.where = {};
-        listQuery.where.name = params.search;
+        if(!listQuery.where) listQuery.where = [];
+        listQuery.where.push({ name: params.search }) 
     }
 
     if (params.sortedBy && params.orderBy) {
