@@ -63,9 +63,6 @@ const HealthInsuranceController = {
         
     }
 
-
-
-
 }
 
 module.exports = HealthInsuranceController;

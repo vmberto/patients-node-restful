@@ -41,7 +41,6 @@ const UsersController = {
         return token.then(t => res.json(t));
     }
 
-
 }
 
 module.exports = UsersController;

@@ -32,7 +32,6 @@ const PatientsController = {
 
             }
 
-
             let responseBundle = { data: patients.rows, meta }
 
             res.status(200).send(responseBundle)
@@ -41,6 +40,7 @@ const PatientsController = {
             res.status(400).send(err)
         }
     },
+
     async getOnePatient(req, res) {
 
         try {
@@ -56,10 +56,10 @@ const PatientsController = {
         }
 
     },
+    
     async getPatientsTotalCount(req, res) {
 
         try {
-
 
             const patientsTotalCount = await patientsService.countPatients();
 
@@ -67,13 +67,12 @@ const PatientsController = {
 
             res.status(200).send(responseBundle)
 
-
-
         } catch (err) {
             res.status(400).send(err);
         }
 
     },
+
     async postCreatePatient(req, res) {
         try {
             let params = req.body;
@@ -89,6 +88,7 @@ const PatientsController = {
         }
 
     },
+
     async postEditPatient(req, res) {
         try {
             const bodyParams = req.body;
@@ -104,6 +104,7 @@ const PatientsController = {
         }
 
     },
+
     async deletePatient(req, res) {
         try {
             let params = req.params;
@@ -117,6 +118,7 @@ const PatientsController = {
         }
 
     },
+
     async postCreatePatientSession(req, res) {
         try {
             let params = req.params;
@@ -132,8 +134,6 @@ const PatientsController = {
             res.status(400).send({error: true, message: "Não foi possível criar a sessão"});
         }
     }
-
-
 
 }
 
