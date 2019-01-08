@@ -7,21 +7,28 @@ const _jwtSecret = '0.rfyj3n9nzh'
 
 const UserService = {
 
+    createUser({ email, password, name }) {
+
+        password = bcrypt.hashSync(password);
+
+        return db.User.create({ email, password, name });
+
+    },
+
     login(email) {
-        
+
         return db.User.findOne({ where: { email } })
-        .then(user => {
-            if(!user) throw 'erro';
-            
-            const { id, email } = user;
-            
-            user.password = bcrypt.hashSync(user.password, _saltRounds);
-            return { user, token: jwt.sign({ id, email }, _jwtSecret) }
-            
-        })
-        .catch(e => {
-            console.log(e);
-        });
+            .then(user => {
+                if (!user) throw 'erro';
+
+                const { id, email } = user;
+
+                return { user, token: jwt.sign({ id, email }, _jwtSecret) }
+
+            })
+            .catch(e => {
+                console.log(e);
+            });
     },
 
     verifyToken(token) {
@@ -43,14 +50,7 @@ const UserService = {
 
 module.exports = UserService;
 
-    // register({ email, password }: UserAddModel) {
 
-    //     return bcrypt.hash(password, _saltRounds)
-    //         .then(hash => {
-    //             return User.create({ email, password: hash })
-    //                 .then(u => getUserById(u!.id))
-    //         })
-    // }
 
 
     // getUserById(id: number) {

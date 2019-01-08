@@ -13,9 +13,7 @@ module.exports = function (app) {
 
     app.use('/api/anamnesis', anamnesisRouter);
 
-    app.use('/', userRouter);
-
-
+    app.use('/api', userRouter);
 
 
 
