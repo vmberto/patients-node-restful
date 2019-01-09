@@ -1,7 +1,7 @@
 
 const patientsService = require('../services/patients.service');
 const healthInsurancesService = require('../services/health-insurance.service');
-const SessionsService = require('../services/sessions.service');
+const sessionsService = require('../services/sessions.service');
 
 const PatientsController = {
 
@@ -50,12 +50,9 @@ const PatientsController = {
 
             let patient = await patientsService.findPatient(params.id, queryParams.sessions_limit);
 
-
-            res.status(200).send(patient)
+            res.status(200).send(patient);
 
         } catch (err) {
-            console.log(err);
-            
             res.status(400).json(err)
         }
 
@@ -128,7 +125,7 @@ const PatientsController = {
             let params = req.params;
             let bodyParams = req.body;
 
-            const new_session = await SessionsService.createSessions(params.id, bodyParams);
+            const new_session = await sessionsService.createSessions(params.id, bodyParams);
 
             const responseBundle = { new_session }
 

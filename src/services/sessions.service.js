@@ -12,7 +12,11 @@ const SessionsService = {
             humour_id
           });
 
-    }
+    },
+
+    countSessions(patients_id) {
+        return db.Sessions.count({ where: { patients_id }});
+    },
 
 }
 
