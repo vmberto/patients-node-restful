@@ -14,7 +14,7 @@ const PatientsService = {
             queryBuilder.where.push({ health_insurance_id: queryParams.health_insurance == -1 ? null : queryParams.health_insurance });
         }
 
-        if(queryParams.patient_status) {
+        if (queryParams.patient_status) {
             if (!queryBuilder.where) queryBuilder.where = [];
             queryBuilder.where.push({ patient_status_id: queryParams.patient_status });
         }
@@ -23,9 +23,21 @@ const PatientsService = {
         return db.Patients.findAndCountAll(queryBuilder);
     },
 
-    findPatient(id) {
+    findPatient(id, sessions_limit) {
+        
         return db.Patients
-            .findByPk(id, { include: [{ model: db.HealthInsurance }, { model: db.Address }, { model: db.Contact }, { model: db.Sessions, include: [{ model: db.Humour }] }] });
+            .findByPk(id, {
+                include: [
+                    { model: db.HealthInsurance },
+                    { model: db.Address },
+                    { model: db.Contact },
+                    {
+                        model: db.Sessions,
+                        limit: parseInt(sessions_limit),
+                        include: [{ model: db.Humour }]
+                    }
+                ]
+            });
     },
 
     countPatients() {

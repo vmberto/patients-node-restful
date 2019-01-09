@@ -10,8 +10,6 @@ const SessionsService = {
             description,
             attendance_at,
             humour_id
-          }, {
-            include: [ db.Humour ]
           });
 
     }

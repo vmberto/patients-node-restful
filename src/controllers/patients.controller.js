@@ -45,14 +45,18 @@ const PatientsController = {
 
         try {
             let params = req.params;
+            let queryParams = req.query;
 
-            let patient = await patientsService.findPatient(params.id)
+
+            let patient = await patientsService.findPatient(params.id, queryParams.sessions_limit);
 
 
             res.status(200).send(patient)
 
         } catch (err) {
-            res.status(400).send(err)
+            console.log(err);
+            
+            res.status(400).json(err)
         }
 
     },
@@ -124,9 +128,9 @@ const PatientsController = {
             let params = req.params;
             let bodyParams = req.body;
 
-            const newSession = await SessionsService.createSessions(params.id, bodyParams);
+            const new_session = await SessionsService.createSessions(params.id, bodyParams);
 
-            const responseBundle = { newSession }
+            const responseBundle = { new_session }
 
             res.status(200).json(responseBundle);
 
