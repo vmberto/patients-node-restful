@@ -24,7 +24,7 @@ const PatientsService = {
     },
 
     findPatient(id, sessions_limit) {
-        
+
         return db.Patients
             .findByPk(id, {
                 include: [

@@ -31,7 +31,7 @@ const PdfGeneratorService = {
             format: 'A4',
             orientation: 'portrait',
             border: {
-                "top": "1.5cm",            // default is 0, units: mm, cm, in, px
+                "top": "1.5cm",
                 "right": "1.4cm",
                 "bottom": "1.5cm",
                 "left": "1.4cm"

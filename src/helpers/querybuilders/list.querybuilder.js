@@ -1,3 +1,5 @@
+const Op = require('sequelize').Op;
+
 let listQueryBuilder = function (params) {
     
     const listQuery = {};
@@ -19,6 +21,15 @@ let listQueryBuilder = function (params) {
 
     if (params.page) {
         listQuery.offset = params.limit * (parseInt(params.page) - 1);
+    }
+
+    if (params.min_date && params.max_date) {
+        if(!listQuery.where) listQuery.where = [];
+        listQuery.where.push({
+            attendance_at: {
+                [Op.between]: [params.min_date, params.max_date]
+            }
+        });
     }
     
 

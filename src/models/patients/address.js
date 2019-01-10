@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     Address.associate = function (models) {
-        Address.belongsTo(models.Patients, { foreignKey: 'patients_id' });
+        Address.belongsTo(models.Patients, { foreignKey: 'patients_id', onDelete: 'cascade' });
     };
     return Address;
 };

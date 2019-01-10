@@ -26,8 +26,8 @@ module.exports = (sequelize, DataTypes) => {
     Patients.belongsTo(models.HealthInsurance, {foreignKey: 'health_insurance_id'});
     Patients.belongsTo(models.Contact, {foreignKey: 'contact_id'});
     Patients.belongsTo(models.PatientStatus, {foreignKey: 'patient_status_id', allowNull: false});
-    Patients.hasMany(models.Address, {foreignKey: 'patients_id'});
-    Patients.hasMany(models.Sessions, {foreignKey: 'patients_id'});
+    Patients.hasMany(models.Address, {foreignKey: 'patients_id', onDelete: 'cascade'});
+    Patients.hasMany(models.Sessions, {foreignKey: 'patients_id', onDelete: 'cascade'});
   };
   return Patients;
 };

@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   const Humour = sequelize.define('Humour', constructor, options);
 
   Humour.associate = function(models) {
-    Humour.hasMany(models.Sessions, { foreignKey: 'humour_id' });
+    Humour.hasMany(models.Sessions, { foreignKey: 'humour_id', onDelete: 'cascade' });
   };
   return Humour;
 };
