@@ -6,18 +6,19 @@ const SessionsService = {
 
     findAllSessions(queryParams) {
 
-        let queryBuilder = listQueryBuilder(queryParams);
+        // let queryBuilder = listQueryBuilder(queryParams);
 
-        return db.Sessions.findAll(queryBuilder);
+        return db.Sessions.findAll();
 
     },
 
-    createSessions(patients_id, { description, attendance_at, humour_id }) {
+    createSessions(patients_id, { description, attendance_at, humour_id, duration }) {
 
         return db.Sessions.create({
             patients_id,
             description,
             attendance_at,
+            duration,
             humour_id
         });
 

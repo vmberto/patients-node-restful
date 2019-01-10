@@ -24,12 +24,14 @@ let listQueryBuilder = function (params) {
     }
 
     if (params.min_date && params.max_date) {
+
         if(!listQuery.where) listQuery.where = [];
         listQuery.where.push({
             attendance_at: {
-                [Op.between]: [params.min_date, params.max_date]
+                [Op.between]: [new Date(params.min_date), new Date(params.max_date)]
             }
         });
+
     }
     
 

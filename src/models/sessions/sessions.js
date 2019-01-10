@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
     attendance_at: {
       type: DataTypes.DATE,
       allowNull: false
+    },
+    duration: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   };
 
