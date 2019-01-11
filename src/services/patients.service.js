@@ -24,7 +24,6 @@ const PatientsService = {
     },
 
     findPatient(id, sessions_limit) {
-        console.log(1);
         
         return db.Patients
             .findByPk(id, {
