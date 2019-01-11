@@ -10,18 +10,17 @@ const PatientsController = {
 
             let params = req.query;
 
-            let patients = await patientsService.findAndCountAllPatients(params);
+            let { rows, count } = await patientsService.findAndCountAllPatients(params);
 
-
-            params.total = await patientsService.countPatients();
+            const total = await patientsService.countPatients();
 
             const meta = {
                 paginationConfig: {
-                    "total": params.total === patients.count ? params.total : patients.count,
-                    "count": patients.count,
+                    "total": total === count ? total : count,
+                    "count": count,
                     "per_page": parseInt(params.limit),
                     "current_page": parseInt(params.page),
-                    "total_pages": params.total < params.limit || params.total !== patients.count ? 1 : Math.ceil(params.total / params.limit),
+                    "total_pages": total < params.limit || total !== count ? 1 : Math.ceil(total / params.limit),
                     "links": {},
                 },
                 filterConfig: {
@@ -31,7 +30,7 @@ const PatientsController = {
 
             }
 
-            let responseBundle = { data: patients.rows, meta }
+            let responseBundle = { data: rows, meta }
 
             res.status(200).send(responseBundle)
 
