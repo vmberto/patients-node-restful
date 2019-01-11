@@ -23,12 +23,11 @@ let listQueryBuilder = function (params) {
         listQuery.offset = params.limit * (parseInt(params.page) - 1);
     }
 
-    if (params.min_date && params.max_date) {
-
+    if (params.min_date && params.max_date && params.filtered_date) {
         if(!listQuery.where) listQuery.where = [];
         listQuery.where.push({
-            attendance_at: {
-                [Op.between]: [new Date(params.min_date), new Date(params.max_date)]
+            [params.filtered_date]: {
+                [Op.between]: [params.min_date, params.max_date]
             }
         });
 

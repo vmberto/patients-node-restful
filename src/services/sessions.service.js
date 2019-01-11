@@ -6,9 +6,11 @@ const SessionsService = {
 
     findAllSessions(queryParams) {
 
-        // let queryBuilder = listQueryBuilder(queryParams);
+        queryParams.filtered_date = 'attendance_at';
 
-        return db.Sessions.findAll();
+        let queryBuilder = listQueryBuilder(queryParams);
+
+        return db.Sessions.findAll(queryBuilder);
 
     },
 
