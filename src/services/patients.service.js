@@ -24,7 +24,8 @@ const PatientsService = {
     },
 
     findPatient(id, sessions_limit) {
-
+        console.log(1);
+        
         return db.Patients
             .findByPk(id, {
                 include: [
@@ -34,9 +35,14 @@ const PatientsService = {
                     {
                         model: db.Sessions,
                         limit: parseInt(sessions_limit),
-                        include: [{ model: db.Humour }]
-                    }
+                        include: [{ model: db.Humour }],
+                        order: [
+                            [ 'created_at', 'desc' ]
+                        ]
+                    },
+                    
                 ]
+                
             });
     },
 
