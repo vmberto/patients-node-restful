@@ -51,6 +51,8 @@ const PatientsController = {
             res.status(200).send(patient);
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).json(err)
         }
 

@@ -11,6 +11,8 @@ patientsRouter.get('/counter', patientsController.getPatientsTotalCount);
 
 patientsRouter.get('/all-sessions', sessionsController.getAllSessions);
 
+patientsRouter.get('/session/total-hours', sessionsController.getAllSessionsDuration);
+
 patientsRouter.get('/:id', patientsController.getOnePatient);
 
 patientsRouter.put('/:id/edit', patientsController.postEditPatient);
