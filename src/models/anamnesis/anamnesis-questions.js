@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
 
   AnamnesisQuestion.associate = function (models) {
     AnamnesisQuestion.belongsTo(models.Anamnesis, { foreignKey: 'anamnesis_id' });
-    AnamnesisQuestion.hasMany(models.QuestionOptions, { foreignKey: 'options_id', as: 'options' });
+    AnamnesisQuestion.hasMany(models.QuestionOptions, { foreignKey: 'options_id', as: 'options', onDelete: 'cascade' });
 
   };
 
