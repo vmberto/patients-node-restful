@@ -1,5 +1,6 @@
 
 const patientsService = require('../services/patients.service');
+const sessionsService = require('../services/sessions.service');
 const healthInsurancesService = require('../services/health-insurance.service');
 
 const PatientsController = {
@@ -45,14 +46,14 @@ const PatientsController = {
             let params = req.params;
             let queryParams = req.query;
 
-
             let patient = await patientsService.findPatient(params.id, queryParams.sessions_limit);
 
-            res.status(200).send(patient);
+            let meta = { total_sessions: await sessionsService.countSessions(params.id) }
+
+
+            res.status(200).send({ patient, meta });
 
         } catch (err) {
-            console.log(err);
-            
             res.status(400).json(err)
         }
 

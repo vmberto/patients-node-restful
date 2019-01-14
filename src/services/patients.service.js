@@ -36,7 +36,7 @@ const PatientsService = {
                         limit: parseInt(sessions_limit),
                         include: [{ model: db.Humour }],
                         order: [
-                            [ 'created_at', 'desc' ]
+                            [ 'attendance_at', 'desc' ]
                         ]
                     },
                     
