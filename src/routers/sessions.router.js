@@ -4,7 +4,7 @@ const sessionsRouter = Router();
 
 sessionsRouter.get('/', sessionsController.getAllSessions);
 
-sessionsRouter.get('/total-hours', sessionsController.getAllSessionsDuration);
+sessionsRouter.get('/statistics', sessionsController.getSessionsStatistics);
 
 sessionsRouter.post('/:id', sessionsController.postCreatePatientSession);
 

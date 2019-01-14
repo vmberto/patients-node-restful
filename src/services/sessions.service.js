@@ -9,6 +9,7 @@ const SessionsService = {
         queryParams.filtered_date = 'attendance_at';
 
         let queryBuilder = listQueryBuilder(queryParams);
+        queryBuilder.raw = true;
 
         return db.Sessions.findAll(queryBuilder);
 
