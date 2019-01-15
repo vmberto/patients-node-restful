@@ -1,5 +1,5 @@
 const sessionsService = require('../services/sessions.service');
-const { getNumbers, getTotalHours, getTotalPatients, enumerateDaysBetweenDates } = require('../helpers/utils');
+const { getNumbers, getTotalHours, getTotalPatients, enumerateDaysBetweenDates } = require('../utils/session-statistics.utils');
 
 const SessionsController = {
 

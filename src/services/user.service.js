@@ -22,7 +22,6 @@ const UserService = {
                 if (!user) throw 'erro';
 
                 const { id, email } = user;
-
                 return { user, token: jwt.sign({ id, email }, _jwtSecret) }
 
             })

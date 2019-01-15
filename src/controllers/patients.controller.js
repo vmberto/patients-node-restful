@@ -2,6 +2,8 @@
 const patientsService = require('../services/patients.service');
 const sessionsService = require('../services/sessions.service');
 const healthInsurancesService = require('../services/health-insurance.service');
+const listMetaBuilder = require('../utils/builders/list-meta.builder');
+
 
 const PatientsController = {
 
@@ -9,34 +11,24 @@ const PatientsController = {
 
         try {
 
-            let params = req.query;
-
-            let { rows, count } = await patientsService.findAndCountAllPatients(params);
-
+            let { query } = req;
+            let { rows, count } = await patientsService.findAndCountAllPatients(query);
             const total = await patientsService.countPatients();
-
-            const meta = {
-                paginationConfig: {
-                    "total": total === count ? total : count,
-                    "count": count,
-                    "per_page": parseInt(params.limit),
-                    "current_page": parseInt(params.page),
-                    "total_pages": total < params.limit || total !== count ? 1 : Math.ceil(total / params.limit),
-                    "links": {},
-                },
-                filterConfig: {
-                    "health_insurances": [...await healthInsurancesService.findAllHealthInsurances(), { id: -1, name: 'Nenhum' }]
-
+            const filters = [
+                { 
+                  title: 'health_insurances',
+                  value: [...await healthInsurancesService.findAllHealthInsurances(), { id: -1, name: 'Nenhum' }]
                 }
+            ];
 
-            }
+            const meta = listMetaBuilder(total, count, query.limit, query.page, filters);
 
-            let responseBundle = { data: rows, meta }
+            let responseBundle = { data: rows, meta };
 
-            res.status(200).send(responseBundle)
+            res.status(200).send(responseBundle);
 
         } catch (err) {
-            res.status(400).send(err)
+            res.status(400).send({ error: true, message: 'Não foi possível listar os pacientes' });
         }
     },
 
@@ -48,13 +40,13 @@ const PatientsController = {
 
             let patient = await patientsService.findPatient(params.id, queryParams.sessions_limit);
 
-            let meta = { total_sessions: await sessionsService.countSessions(params.id) }
+            let meta = { total_sessions: await sessionsService.countSessions(params.id) };
 
 
             res.status(200).send({ patient, meta });
 
         } catch (err) {
-            res.status(400).json(err)
+            res.status(400).json(err);
         }
 
     },

@@ -1,11 +1,9 @@
-const listQueryBuilder = require('../helpers/querybuilders/list.querybuilder');
+const listQueryBuilder = require('../utils/builders/list-query.builder');
 const db = require("../models/index.js");
-
-// CRIAR ANAMNESE => PREENCHE CAMPOS => CLICK SUBMIT FORM BTN => ADICIONA NA TELA OPÇÃO DE ADICIONAR PERGUNTAS NA ANAMNESE
 
 const AnamnesisService = {
 
-    findAllAnamnesis(queryParams) {
+    findAndCountAllAnamnesis(queryParams) {
         let queryBuilder = listQueryBuilder(queryParams);
 
         queryBuilder.include = [{ model: db.AnamnesisQuestion, as: 'questions'}];
@@ -50,6 +48,7 @@ const AnamnesisService = {
         }, {
                 include: [{ model: db.QuestionOptions, as: 'options' }]
             });
+
     },
 
     deleteAnamnesisQuestion(id) {

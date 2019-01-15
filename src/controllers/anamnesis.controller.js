@@ -1,33 +1,26 @@
 const anamnesisService = require('../services/anamnesis.service');
 const PdfGeneratorService = require('../services/pdf-generator.service');
+const listMetaBuilder = require('../utils/builders/list-meta.builder');
 const fs = require('fs');
-
-
 
 const AnamnesisController = {
 
+    /**
+     * Sends a filtered paginated Anamnesis list 
+     * @param {Request} req 
+     * @param {Response} res 
+     */
     async getAnamnesisList(req, res) {
 
         try {
 
-            let params = req.query;
+            const { query } = req;
+            const { rows, count } = await anamnesisService.findAndCountAllAnamnesis(query);
+            const total = await anamnesisService.countAnamnesis();
 
-            let anamnesis = await anamnesisService.findAllAnamnesis(params);
+            const meta = listMetaBuilder(total, count, query.limit, query.page);
 
-            params.total = await anamnesisService.countAnamnesis();
-
-            const meta = {
-                paginationConfig: {
-                    "total": params.total === anamnesis.count ? params.total : anamnesis.count,
-                    "count": anamnesis.count,
-                    "per_page": parseInt(params.limit) || 15,
-                    "current_page": parseInt(params.page) || 1,
-                    "total_pages": (params.total < params.limit || params.total !== anamnesis.count ? 1 : Math.ceil(params.total / params.limit)) || 1,
-                    "links": {},
-                }
-            }
-
-            let responseBundle = { data: anamnesis.rows, meta }
+            const responseBundle = { data: rows, meta }
 
             res.status(200).send(responseBundle)
 
@@ -37,11 +30,16 @@ const AnamnesisController = {
 
     },
 
+    /**
+     * Sends one Anamnesis specified by ID  
+     * @param {Request} req 
+     * @param {Response} res 
+     */
     async getOneAnamnesis(req, res) {
 
         try {
-            
-            let params = req.params;
+
+            let { params } = req;
 
             let anamnesis = await anamnesisService.findAnamnesis(params.id)
 
@@ -53,14 +51,19 @@ const AnamnesisController = {
 
     },
 
+    /**
+    * Creates one Anamnesis  
+    * @param {Request} req 
+    * @param {Response} res 
+    */
     async postCreateAnamensis(req, res) {
         try {
 
-            let bodyParams = req.body;
+            const { body } = req;
 
-            const newAnamnesis = await anamnesisService.createAnamnesis(bodyParams);
+            const anamnesis = await anamnesisService.createAnamnesis(body);
 
-            const responseBundle = newAnamnesis;
+            const responseBundle = anamnesis;
 
             res.status(200).json(responseBundle);
 
@@ -69,10 +72,15 @@ const AnamnesisController = {
         }
     },
 
+    /**
+    * Deletes one Anamnesis sepecified by ID 
+    * @param {Request} req 
+    * @param {Response} res 
+    */
     async deleteAnamnesis(req, res) {
 
         try {
-            let params = req.params;
+            let { params } = req;
 
             await anamnesisService.deleteAnamnesis(params.id);
 
@@ -84,60 +92,71 @@ const AnamnesisController = {
 
     },
 
+    /**
+    * Creates a question for an Anamnesis specified by ID
+    * @param {Request} req 
+    * @param {Response} res 
+    */
     async postCreateAnamnesisQuestion(req, res) {
         try {
-            let anamnesisId = req.params.id;
-            let bodyParams = req.body;
+            const { body: bodyParams, params } = req;
 
-            const newQuestion = await anamnesisService.createAnamnesisQuestion(anamnesisId, bodyParams);
+            const newQuestion = await anamnesisService.createAnamnesisQuestion(params.id, bodyParams);
 
             const responseBundle = newQuestion;
 
             res.status(200).json(responseBundle);
 
         } catch (err) {
-            console.log(err);
-            
             res.status(400).send(err);
         }
     },
 
+    /**
+    * Deletes a question specified by ID
+    * @param {Request} req 
+    * @param {Response} res 
+    */
     async deleteAnamnesisQuestion(req, res) {
 
         try {
             let params = req.params;
-            
+
             await anamnesisService.deleteAnamnesisQuestion(params.id);
-    
-            res.status(200).json({deleted: `A pergunta ${params.id} foi excluída`});
-    
-        }catch (err){
-            
+
+            res.status(200).json({ deleted: `A pergunta ${params.id} foi excluída` });
+
+        } catch (err) {
             res.status(400).send(err);
         }
 
 
     },
 
+    /**
+    * Downloads an Anamnesis specified by ID with (or not with) patients data
+    * 
+    * @TODO Maybe will be possible to download an already answered anamnesis
+    * @param {Request} req 
+    * @param {Response} res 
+    */
     async pdfgenerate(req, res) {
         try {
             const anamnesisId = req.params.id;
 
-            payload = {id: anamnesisId, token: req.headers.authorization}
-            
+            payload = { id: anamnesisId, token: req.headers.authorization }
+
             await PdfGeneratorService.generatePdf(payload);
-    
+
             let file = fs.readFileSync('./static/output/anamnesis.pdf');
             const filename = 'anamnese';
-    
+
             res.setHeader('Content-Type', "application/pdf");
             res.setHeader('Content-Disposition', 'pdf; filename=' + `${filename}.pdf`);
 
             res.send(file);
 
         } catch (err) {
-            console.log(err);
-
             res.status(400).send(err);
         }
 

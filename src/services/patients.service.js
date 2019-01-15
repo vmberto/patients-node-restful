@@ -1,4 +1,4 @@
-const listQueryBuilder = require('../helpers/querybuilders/list.querybuilder');
+const listQueryBuilder = require('../utils/builders/list-query.builder');
 const db = require("../models/index.js");
 
 const PatientsService = {

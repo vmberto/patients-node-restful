@@ -1,6 +1,6 @@
 
 const userService = require('../services/user.service');
-const noAuthRoutes = require('../helpers/noauth-routes');
+const noAuthRoutes = require('../utils/noauth-routes');
 
 function getTokenFromHeaders(headers) {
   const header = headers.authorization;

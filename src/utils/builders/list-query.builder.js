@@ -1,5 +1,10 @@
 const Op = require('sequelize').Op;
 
+/**
+ * Returns an object with options to query
+ * 
+ * @param {object} params 
+ */
 let listQueryBuilder = function (params) {
     
     const listQuery = {};
