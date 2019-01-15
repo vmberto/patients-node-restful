@@ -6,14 +6,14 @@ const basename = path.basename(__filename);
 
 const db = {};
 
-const sequelize = require('../config.js');
+const connection = require('../database/connection.js');
 const folders = [];
 
 fs
   .readdirSync(__dirname)
   .forEach(file => {
     if ((file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')) {
-      const model = sequelize['import'](path.join(__dirname, file));
+      const model = connection['import'](path.join(__dirname, file));
       db[model.name] = model;
     } else if ((file !== basename)) {
       folders.push(file);
@@ -26,7 +26,7 @@ folders.forEach(folder => {
   fs.readdirSync(currentFolder)
     .forEach(file => {
       if ((file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')) {
-        const model = sequelize['import'](path.join(currentFolder, file));
+        const model = connection['import'](path.join(currentFolder, file));
         db[model.name] = model;
       }
     });
@@ -39,9 +39,9 @@ Object.keys(db).forEach(modelName => {
   }
 });
 
-db.sequelize = sequelize;
+db.connection = connection;
 db.Sequelize = Sequelize;
 
-db.sequelize.sync();
+db.connection.sync();
 
 module.exports = db;
