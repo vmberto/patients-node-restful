@@ -33,7 +33,7 @@ const PatientsService = {
                     { model: db.Contact },
                     {
                         model: db.Sessions,
-                        limit: parseInt(sessions_limit),
+                        limit: sessions_limit ? parseInt(sessions_limit) : null,
                         include: [{ model: db.Humour }],
                         order: [
                             [ 'attendance_at', 'desc' ]
