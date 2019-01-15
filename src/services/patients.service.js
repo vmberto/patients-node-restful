@@ -9,6 +9,9 @@ const PatientsService = {
 
         queryBuilder.include = [{ model: db.HealthInsurance }, { model: db.PatientStatus }];
 
+        /**
+         * @TODO Pass this two statements to an optional query in the listQueryBuilder method
+         */
         if (queryParams.health_insurance) {
             if (!queryBuilder.where) queryBuilder.where = [];
             queryBuilder.where.push({ health_insurance_id: queryParams.health_insurance == -1 ? null : queryParams.health_insurance });
