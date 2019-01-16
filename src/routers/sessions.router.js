@@ -1,12 +1,12 @@
 const Router = require('express');
 const sessionsController = require('../controllers/sessions.controller');
+const sessionsRules = require('../rules/sessions.rules');
 const sessionsRouter = Router();
 
 sessionsRouter.get('/statistics', sessionsController.getSessionsStatistics);
 
-sessionsRouter.post('/:id', sessionsController.postCreatePatientSession);
+sessionsRouter.post('/download', sessionsRules['forEvolutionDownload'], sessionsController.downloadPatientEvolution);
 
-/** @TODO Ver se ficará melhor trocar o id do paciente de parametro da url para parametro do body */
-sessionsRouter.post('/download/:id', sessionsController.downloadPatientEvolution);
+sessionsRouter.post('/:id', sessionsController.postCreatePatientSession);
 
 module.exports = sessionsRouter;

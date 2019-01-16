@@ -1,6 +1,7 @@
 const { getNumbers, getTotalHours, getTotalPatients, enumerateDaysBetweenDates } = require('../utils/session-statistics.utils');
 const sessionsService = require('../services/sessions.service');
 const PdfGeneratorService = require('../services/pdf-generator.service');
+const validationResult = require('express-validator/check')['validationResult'];
 const fs = require('fs');
 
 
@@ -8,10 +9,10 @@ const SessionsController = {
 
     async postCreatePatientSession(req, res) {
         try {
-            let params = req.params;
+            let { id: patientId } = req.params;
             let bodyParams = req.body;
 
-            const new_session = await sessionsService.createSessions(params.id, bodyParams);
+            const new_session = await sessionsService.createSessions(patientId, bodyParams);
 
             const responseBundle = { new_session }
 
@@ -46,29 +47,27 @@ const SessionsController = {
     async downloadPatientEvolution(req, res) {
 
         try {
+            const errors = validationResult(req);
+            
+            if (!errors.isEmpty()) throw errors.array();
 
-            const { id } = req.params;
-            const { last_sessions_number } = req.body;
+            const { last_sessions_number, patient_id } = req.body;
             const file_type = 'patient-evolution';
 
-            payload = { id, token: req.headers.authorization, last_sessions_number, file_type}
-
+            payload = { patient_id, token: req.headers.authorization, last_sessions_number, file_type }
 
             await PdfGeneratorService.generatePdf(payload);
 
             let file = fs.readFileSync('./static/output/patient-evolution.pdf');
-            const filename = 'patient-evolution';
 
             res.setHeader('Content-Type', "application/pdf");
-            res.setHeader('Content-Disposition', 'pdf; filename=' + `${filename}.pdf`);
+            res.setHeader('Content-Disposition', 'pdf;');
 
-            res.send(file);
+            res.status(200).send(file);
 
 
         } catch (err) {
-            console.log(err);
-            
-            res.status(400).send({ error: true, message: "Não foi possível baixar a evolução do paciente" });
+            res.status(400).send({ error: true, description: err || "Não foi possível baixar a evolução do paciente" });
         }
 
     }

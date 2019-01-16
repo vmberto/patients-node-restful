@@ -31,13 +31,10 @@ const PdfGeneratorService = {
 
         } else if (payload.file_type === 'patient-evolution') {
 
-            object = await sessionsService.findAllSessions( { limit: payload.last_sessions_number, orderBy: 'attendance_at', sortedBy: 'desc', patients_id: payload.id } );
+            if (!payload.last_sessions_number) throw 'fuck';
+            object = await sessionsService.findAllSessions( { limit: payload.last_sessions_number, orderBy: 'attendance_at', sortedBy: 'desc', patients_id: payload.patient_id } );
 
             object.forEach(session => session.attendance_at = moment(session.attendance_at).format('DD/MM/YYYY'))
-
-            object[1].description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-            object[4].description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-            object[5].description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
 
             options = {
                 sessions: object,

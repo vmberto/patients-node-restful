@@ -4,7 +4,7 @@
  * @param {number} count Total number of values that were fetched
  * @param {number} limit Max number of values to be fetched
  * @param {number} page Current page
- * @param {object[]} filters Object array with filters to be applied 
+ * @param {object[]} filters [optional] Object array with filters to be applied 
  */
 const listMetaBuilder = function (total, count, limit, page, filters = []) {
     
