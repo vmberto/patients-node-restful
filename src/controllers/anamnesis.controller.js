@@ -141,11 +141,16 @@ const AnamnesisController = {
     * @param {Response} res 
     */
     async pdfgenerate(req, res) {
+
         try {
-            const anamnesisId = req.params.id;
+            
+            const { id } = req.params;
+            const { body: patient } = req;
+            const file_type = 'anamnesis';
 
-            payload = { id: anamnesisId, token: req.headers.authorization }
+            payload = { id, token: req.headers.authorization, patient, file_type }
 
+            
             await PdfGeneratorService.generatePdf(payload);
 
             let file = fs.readFileSync('./static/output/anamnesis.pdf');
@@ -157,6 +162,8 @@ const AnamnesisController = {
             res.send(file);
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send(err);
         }
 

@@ -41,9 +41,6 @@ const UsersController = {
         return token.then(t => res.json(t));
     },
 
-    logout(req, res) {
-           
-    }
 
 }
 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://use.typekit.net/inw2mil.css">
+
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        body {
+            font-family: ivyjournal, sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 14px;
+        }
+
+        hr {
+            margin-top: 20px;
+        }
+
+        div,
+        span,
+        p {
+            word-wrap: break-word;
+            text-align: justify;
+        }
+
+        div span {
+            font-weight: bold;
+        }
+
+        .attendance-date {
+            font-size: 15px;
+            font-weight: bold;
+            margin: 8px 0 0 12px;
+        }
+
+        .session-description {
+            font-size: 20px;
+            padding: 12px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <table style="margin-bottom: 15px;">
+        <td style="text-align: center;">
+            <img src="<%=config.base_url%>/static/images/header.png?authorization=<%= config.token %>" />
+        </td>
+    </table>
+
+    <% sessions.forEach(function(session) { %>
+    <div class="pageFooter" style="margin-top: 20px; width: 100%; min-height: 140px; height: auto; border: 2px solid black;">
+
+        <table>
+
+            <tr>
+                <td>
+                    <p class="attendance-date">Data: <%= session.attendance_at %></p>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <p class="session-description"><%= session.description %></p>
+                </td>
+            </tr>
+
+        </table>
+
+
+    </div>
+    <% }); %>
+
+</body>
+
+
+</html>

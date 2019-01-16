@@ -6,10 +6,16 @@ const SessionsService = {
 
     findAllSessions(queryParams) {
 
+        /**@TODO refactor */
         queryParams.filtered_date = 'attendance_at';
 
         let queryBuilder = listQueryBuilder(queryParams);
         queryBuilder.raw = true;
+        
+        if(queryParams.patients_id) {
+            if(!queryBuilder.where) queryBuilder.where = [];
+            queryBuilder.where.push({ patients_id: queryParams.patients_id })
+        }
 
         return db.Sessions.findAll(queryBuilder);
 
