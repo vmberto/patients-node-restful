@@ -22,6 +22,17 @@
             text-decoration: none;
         }
 
+        h1 {
+            font-weight: 300;
+            text-align: center;
+        }
+
+        small {
+            display: block;
+            text-align: center;
+        }
+
+
         body {
             font-family: ivyjournal, sans-serif;
             font-weight: 400;
@@ -51,12 +62,22 @@
 
     <div class="container">
 
-        <table style="margin-bottom: 15px;">
-            <td style="text-align: center;">
-                <img src="<%=config.base_url%>/static/images/header.png?authorization=<%= config.token %>" />
-            </td>
+        <table style="margin-bottom: 20px;">
+            <tr>
+                <td style="text-align: center;">
+                    <img src="<%=config.base_url%>/static/images/header.png?authorization=<%= config.token %>" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h1>Anamnese Psicológica</h1>
+                    <small>Baseado em Kuyken, W., Padesky, C. A., & Dudley, R. (2010. Conceitualização de casos colaborativa. Porto Alegre, Artmed</small>
+                </td>
+            </tr>
         </table>
 
+        <!--  -->
+        <!-- Baseado em Kuyken, W., Padesky, C. A., & Dudley, R. (2010. Conceitualização de casos colaborativa. Porto Alegre, Artmed -->
 
         <table>
             <tr>
