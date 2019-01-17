@@ -58,14 +58,13 @@ const PatientsService = {
             {
                 name: params.name,
                 is_private: params.is_private,
-                health_insurance_id: params.health_insurance_id ? params.health_insurance_id : null,
+                health_insurance_id: params.health_insurance_id || null,
                 patient_status_id: 1,
                 Contact: {
                     email: params.email,
                     phone: params.phone,
                 },
-                Addresses: [
-                    {
+                Address:{
                         city: params.address.city,
                         district: params.address.district,
                         zip_code: params.address.zip_code,
@@ -73,7 +72,7 @@ const PatientsService = {
                         number: params.address.number,
                         complement: params.address.complement
                     }
-                ]
+                
             },
             {
                 include: [db.Address, db.Contact]
@@ -93,7 +92,8 @@ const PatientsService = {
     deletePatient(id) {
 
         return db.Patients.destroy({
-            where: { id }
+            where: { id },
+            include: [ db.Contact ]
         });
 
     }

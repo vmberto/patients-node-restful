@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         });
 
     PatientStatus.associate = function (models) {
-        PatientStatus.hasMany(models.Patients, { foreignKey: 'patient_status_id' });
+        PatientStatus.hasMany(models.Patients, { foreignKey: 'patient_status_id', allowNull: false });
     };
 
     return PatientStatus;

@@ -13,11 +13,10 @@ module.exports = (sequelize, DataTypes) => {
     },
         {
             underscored: true,
-            freezeTableName: true
+            freezeTableName: true,
+            timestamps: false
         });
 
-    Contact.associate = function (models) {
-        Contact.hasMany(models.Patients, { foreignKey: 'contact_id' });
-    };
+
     return Contact;
 };
