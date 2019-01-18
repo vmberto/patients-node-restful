@@ -43,18 +43,16 @@ const PdfGeneratorService = {
 
         }
 
-        /** @TODO Ver se o atributo css: 'page-break-after:always;' sendo colocado na div quando estiver perto do tamanho da folha a4 funcionará para evitar q nao tenha nada cortado de uma pagina para outra */
-
         let template = await htmlGenerator(templateFile, options);
 
         await pdfGenerator(payload.file_type, template, {
             format: 'A4',
             orientation: 'portrait',
             border: {
-                "top": "1.5cm",
-                "right": "1.4cm",
-                "bottom": "1.5cm",
-                "left": "1.4cm"
+                "top": "1.3cm",
+                "right": "1.2cm",
+                "bottom": "1.3cm",
+                "left": "1.2cm"
             }
         });
 
