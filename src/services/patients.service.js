@@ -42,6 +42,7 @@ const PatientsService = {
                             [ 'attendance_at', 'desc' ]
                         ]
                     },
+                    { model: db.MaritalStatus, include: [db.MaritalStatusType] }
                     
                 ]
                 
@@ -60,6 +61,11 @@ const PatientsService = {
                 is_private: params.is_private,
                 health_insurance_id: params.health_insurance_id || null,
                 patient_status_id: 1,
+                MaritalStatus: {
+                    childrens_number: params.childrens_number,
+                    union_time: params.marital_status_type_id === 1 ? '0' : params.union_time,
+                    marital_status_type_id: params.marital_status_type_id
+                },
                 Contact: {
                     email: params.email,
                     phone: params.phone,
@@ -75,7 +81,7 @@ const PatientsService = {
                 
             },
             {
-                include: [db.Address, db.Contact]
+                include: [db.Address, db.Contact, db.MaritalStatus]
             });
 
     },

@@ -10,10 +10,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete('PatientStatus', [
-      { id: 1, name: 'Ativo' },
-      { id: 2, name: 'Inativo' },
-      { id: 3, name: 'De Alta' },
-    ], {});
+    return queryInterface.bulkDelete('PatientStatus');
   }
 };

@@ -25,6 +25,8 @@ module.exports = (sequelize, DataTypes) => {
   Patients.associate = function (models) {
     Patients.hasOne(models.Contact,   { onDelete: 'cascade' });
     Patients.hasOne(models.Address,   { onDelete: 'cascade' });
+    Patients.hasOne(models.MaritalStatus, { foreignKey: 'marital_status_id', onDelete: 'cascade', allowNull: false });
+
     Patients.hasMany(models.Sessions, { onDelete: 'cascade', foreignKey:'patients_id' });
 
     Patients.belongsTo(models.HealthInsurance, { foreignKey: 'health_insurance_id' });

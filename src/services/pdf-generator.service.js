@@ -31,7 +31,7 @@ const PdfGeneratorService = {
 
         } else if (payload.file_type === 'patient-evolution') {
 
-            if (!payload.last_sessions_number) throw 'fuck';
+            if (!payload.last_sessions_number) throw "Can't create Patient Evolution without Last Sessions Number";
             object = await sessionsService.findAllSessions( { limit: payload.last_sessions_number, orderBy: 'attendance_at', sortedBy: 'desc', patients_id: payload.patient_id } );
 
             object.forEach(session => session.attendance_at = moment(session.attendance_at).format('DD/MM/YYYY'))
