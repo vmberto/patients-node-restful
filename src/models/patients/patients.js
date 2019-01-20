@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
-    /**@TODO create model for the medic who forwarded the patient */
     forwarded_by: {
       type: DataTypes.STRING,
       allowNull: true

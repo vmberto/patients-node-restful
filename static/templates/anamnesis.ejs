@@ -129,17 +129,17 @@
             <tr>
                 <td height="20" width="75%" valign="top">
                     <label>Endereço: </label>
-                    <% if (patientData && patientData.name) { %>
+                    <% if (patientData && patientData.Address && patientData.Address.street) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.street %>
+                        <%= patientData.Address.street %>
                     </p>
                     <% } %>
                 </td>
                 <td height="20" width="25%" valign="top">
                     <label>Número: </label>
-                    <% if (patientData && patientData.name) { %>
+                    <% if (patientData && patientData.Address && patientData.Address.number) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.street %>
+                        <%= patientData.Address.number %>
                     </p>
                     <% } %>
                 </td>
@@ -150,17 +150,17 @@
             <tr>
                 <td height="20" width="50%" valign="top">
                     <label>Telefone: </label>
-                    <% if (patientData && patientData.name) { %>
+                    <% if (patientData && patientData.Contact && patientData.Contact.phone) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.Contact.phone %>
                     </p>
                     <% } %>
                 </td>
                 <td height="20" width="50%" valign="top">
                     <label>Email: </label>
-                    <% if (patientData && patientData.name) { %>
+                    <% if (patientData && patientData.Contact && patientData.Contact.email) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.Contact.email %>
                     </p>
                     <% } %>
                 </td>
