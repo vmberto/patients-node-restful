@@ -23,8 +23,6 @@ app.use(tokenGuard());
 
 routers(app);
 
-
-
 const port = process.env.SERVER_PORT;
 
 

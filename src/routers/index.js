@@ -4,9 +4,9 @@ const sessionsRouter = require('./sessions.router');
 const userRouter = require('./user.router');
 const patientsRouter = require('./patients.router');
 const anamnesisRouter = require('./anamnesis.router');
+const seekerRouter = require('./seeker.router');
 
 module.exports = function (app) {
-
 
     app.use('/api/patients', patientsRouter);
 
@@ -16,8 +16,9 @@ module.exports = function (app) {
     
     app.use('/api/sessions', sessionsRouter);
 
-    app.use('/api', userRouter);
+    app.use('/api/seeker', seekerRouter);
 
+    app.use('/api', userRouter);
 
 
 };
