@@ -63,7 +63,7 @@ const PatientsService = {
                 patient_status_id: 1,
                 MaritalStatus: {
                     childrens_number: params.childrens_number,
-                    union_time: params.marital_status_type_id === 1 ? '0' : params.union_time,
+                    union_time: params.marital_status_type_id == 1 ? '0' : params.union_time,
                     marital_status_type_id: params.marital_status_type_id
                 },
                 Contact: {
