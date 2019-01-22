@@ -54,6 +54,7 @@
             border-width: thin;
         }
 
+
         hr {
             margin-top: 20px;
         }
@@ -61,11 +62,17 @@
         div,
         p {
             word-wrap: break-word;
+            margin: 0;
         }
 
-        .personal-data-table td {
-            border-bottom: 1px solid #242424;
+        .blank-space {
+            padding-top: 14px;
+            border-bottom: 1px solid #383838;
             border-width: thin;
+        }
+
+        .blank-space p {
+            margin-left: 7px;
         }
 
         .personal-data-table p {
@@ -84,7 +91,7 @@
 
     <div class="container">
 
-        <table style="margin-bottom: 20px;">
+        <table style="margin-bottom: 9px;">
             <tr>
                 <td style="text-align: center;">
                     <img src="<%=config.base_url%>/static/images/header.png?authorization=<%= config.token %>" />
@@ -102,10 +109,12 @@
         </table>
 
 
-        <table class="personal-data-table" width="100%" cellspacing="10">
+        <table class="personal-data-table" width="100%">
             <tr>
-                <td height="20" width="60%" valign="top">
+                <td height="33" width="1%" valign="bottom">
                     <label>Nome: </label>
+                </td>
+                <td height="33" class="blank-space" width="68%">
                     <% if (patientData && patientData.name) { %>
 
                     <p style="display: inline-block;">
@@ -114,95 +123,153 @@
 
                     <% } %>
                 </td>
-                <td height="20" width="40%" valign="top">
+
+                <td height="33" width="1%" valign="bottom">
                     <label>Nascimento: </label>
-                    <% if (patientData && patientData.name) { %>
+                </td>
+                <td height="33" class="blank-space" width="28%">
+                    <% if (patientData && patientData.birthday) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.birthday %>
                     </p>
+                    <% } else {%>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &#47;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &#47;
                     <% } %>
+
                 </td>
             </tr>
         </table>
 
-        <table class="personal-data-table" width="100%" cellspacing="10">
+        <table class="personal-data-table" width="100%">
             <tr>
-                <td height="20" width="75%" valign="top">
-                    <label>Endereço: </label>
-                    <% if (patientData && patientData.Address && patientData.Address.street) { %>
+                <td height="33" width="1%" valign="bottom">
+                    <label>Nacionalidade: </label>
+                </td>
+                <td height="33" class="blank-space" width="32%">
+                    <% if (patientData && patientData.nationality) { %>
+                    <p style="display: inline-block;">
+                        <%= patientData.nationality %>
+                    </p>
+                    <% } %>
+                </td>
+
+                <td height="33" width="1%" valign="bottom">
+                    <label>Religião: </label>
+                </td>
+                <td height="33" class="blank-space" width="32%">
+                    <% if (patientData && patientData.religion) { %>
                     <p style="display: inline-block;">
                         <%= patientData.Address.street %>
                     </p>
                     <% } %>
                 </td>
-                <td height="20" width="25%" valign="top">
-                    <label>Número: </label>
-                    <% if (patientData && patientData.Address && patientData.Address.number) { %>
-                    <p style="display: inline-block;">
-                        <%= patientData.Address.number %>
-                    </p>
-                    <% } %>
-                </td>
-            </tr>
-        </table>
 
-        <table class="personal-data-table" width="100%" cellspacing="10">
-            <tr>
-                <td height="20" width="50%" valign="top">
+                <td height="33" width="1%" valign="bottom">
                     <label>Telefone: </label>
+                </td>
+                <td height="33" class="blank-space" width="32%">
                     <% if (patientData && patientData.Contact && patientData.Contact.phone) { %>
                     <p style="display: inline-block;">
                         <%= patientData.Contact.phone %>
                     </p>
                     <% } %>
                 </td>
-                <td height="20" width="50%" valign="top">
-                    <label>Email: </label>
-                    <% if (patientData && patientData.Contact && patientData.Contact.email) { %>
-                    <p style="display: inline-block;">
-                        <%= patientData.Contact.email %>
-                    </p>
-                    <% } %>
-                </td>
+
+
+
             </tr>
         </table>
 
-        <table class="personal-data-table" width="100%" cellspacing="10">
+        <table class="personal-data-table" width="100%">
             <tr>
-                <td height="20" width="50%" valign="top">
-                    <label>Instrução: </label>
-                    <% if (patientData && patientData.name) { %>
+                <td height="33" width="1%" valign="bottom">
+                    <label>Endereço: </label>
+                </td>
+                <td height="33" class="blank-space" width="68%">
+                    <% if (patientData && patientData.Address && patientData.Address.street && patientData.Address.number && patientData.Address.number) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.Address.street %>,
+                        <%= patientData.Address.number %> -
+                        <%= patientData.Address.city %>
                     </p>
                     <% } %>
                 </td>
-                <td height="20" width="50%" valign="top">
+                <td height="33" width="1%" valign="bottom">
                     <label>Profissão: </label>
-                    <% if (patientData && patientData.name) { %>
+                </td>
+                <td height="33" class="blank-space" width="28%">
+                    <% if (patientData && patientData.profession) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.profession %>
                     </p>
                     <% } %>
                 </td>
             </tr>
         </table>
 
-        <table class="personal-data-table" width="100%" cellspacing="10">
+        <table class="personal-data-table" width="100%">
             <tr>
-                <td height="20" width="50%" valign="top">
-                    <label>Estado Civil:</label>
-                    <% if (patientData && patientData.name) { %>
+                <td height="33" width="12%" valign="bottom">
+                    <label>Estado Civil: </label>
+                </td>
+                <td height="33" class="blank-space" width="30%">
+                    <% if (patientData && patientData.MaritalStatus && patientData.MaritalStatus.MaritalStatusType.name && patientData.MaritalStatus.MaritalStatusType.name) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.MaritalStatus.MaritalStatusType.name %>
                     </p>
                     <% } %>
                 </td>
-                <td height="20" width="50%" valign="top">
-                    <label>Encaminhado por:</label>
-                    <% if (patientData && patientData.name) { %>
+
+                <td height="33" width="16.8%" valign="bottom">
+                    <label>Tempo de União: </label>
+                </td>
+                <td height="33" class="blank-space" width="20%">
+                    <% if (patientData && patientData.profession) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.name %>
+                        <%= patientData.profession %>
+                    </p>
+                    <% } %>
+                </td>
+
+                <td height="33" width="1%" valign="bottom">
+                    <label>Filhos: </label>
+                </td>
+                <td height="33" class="blank-space" width="9%">
+                    <% if (patientData && patientData.profession) { %>
+                    <p style="display: inline-block;">
+                        <%= patientData.profession %>
+                    </p>
+                    <% } %>
+                </td>
+
+
+
+            </tr>
+        </table>
+
+
+        <table class="personal-data-table" width="100%">
+            <tr>
+                <td height="33" width="19.8%" valign="bottom">
+                    <label>Encaminhado por: </label>
+                </td>
+                <td height="33" class="blank-space" width="38%">
+                    <% if (patientData && patientData.forwarded_by) { %>
+                    <p style="display: inline-block;">
+                        <%= patientData.forwarded_by %>
+                    </p>
+                    <% } %>
+                </td>
+                <td height="33" width="14%" valign="bottom">
+                    <label>Especialidade: </label>
+                </td>
+                <td height="33" class="blank-space" width="48%">
+                    <% if (patientData && patientData.forwarded_by_specialization) { %>
+                    <p style="display: inline-block;">
+                        <%= patientData.forwarded_by_specialization %>
                     </p>
                     <% } %>
                 </td>
