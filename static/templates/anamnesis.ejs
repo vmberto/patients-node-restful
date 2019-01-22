@@ -227,9 +227,9 @@
                     <label>Tempo de União: </label>
                 </td>
                 <td height="33" class="blank-space" width="20%">
-                    <% if (patientData && patientData.profession) { %>
+                    <% if (patientData && patientData.MaritalStatus && patientData.MaritalStatus.union_time) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.profession %>
+                        <%= patientData.MaritalStatus.union_time %>
                     </p>
                     <% } %>
                 </td>
@@ -238,9 +238,9 @@
                     <label>Filhos: </label>
                 </td>
                 <td height="33" class="blank-space" width="9%">
-                    <% if (patientData && patientData.profession) { %>
+                    <% if (patientData && patientData.MaritalStatus && patientData.MaritalStatus.childrens_number) { %>
                     <p style="display: inline-block;">
-                        <%= patientData.profession %>
+                        <%= patientData.MaritalStatus.childrens_number %>
                     </p>
                     <% } %>
                 </td>
