@@ -15,9 +15,9 @@ const UsersController = {
                 return res.status(422).json(errors.array());
             }
 
-            const newUser = await userService.createUser(bodyParams);
+            const new_patient = await userService.createUser(bodyParams);
 
-            res.status(200).send({ newUser });
+            res.status(200).send({ new_patient });
 
         } catch(err) {
             res.status(400).send({ error: true, message: err })

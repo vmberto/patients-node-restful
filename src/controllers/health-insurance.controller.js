@@ -39,9 +39,9 @@ const HealthInsuranceController = {
         try {
             let params = req.body;
             
-            const newHealthInsurance = await healthInsurancesService.createHealthInsurance(params);
+            const new_health_insurance = await healthInsurancesService.createHealthInsurance(params);
     
-            res.status(200).json({data: newHealthInsurance});
+            res.status(200).json({ new_health_insurance });
     
         }catch (err){
             res.status(400).send(err);

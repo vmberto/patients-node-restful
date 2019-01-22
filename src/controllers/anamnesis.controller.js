@@ -61,9 +61,9 @@ const AnamnesisController = {
 
             const { body } = req;
 
-            const anamnesis = await anamnesisService.createAnamnesis(body);
+            const new_anamnesis = await anamnesisService.createAnamnesis(body);
 
-            const responseBundle = anamnesis;
+            const responseBundle = { new_anamnesis };
 
             res.status(200).json(responseBundle);
 
@@ -101,9 +101,9 @@ const AnamnesisController = {
         try {
             const { body: bodyParams, params } = req;
 
-            const newQuestion = await anamnesisService.createAnamnesisQuestion(params.id, bodyParams);
+            const new_question = await anamnesisService.createAnamnesisQuestion(params.id, bodyParams);
 
-            const responseBundle = newQuestion;
+            const responseBundle = new_question;
 
             res.status(200).json(responseBundle);
 

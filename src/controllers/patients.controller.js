@@ -71,9 +71,9 @@ const PatientsController = {
         try {
             let params = req.body;
 
-            const newPatient = await patientsService.createPatient(params);
+            const new_patient = await patientsService.createPatient(params);
 
-            const responseBundle = { newPatient }
+            const responseBundle = { new_patient }
 
             res.status(200).json(responseBundle);
 
