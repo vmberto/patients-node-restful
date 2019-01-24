@@ -20,7 +20,7 @@ const UsersController = {
             res.status(200).send({ new_patient });
 
         } catch(err) {
-            res.status(400).send({ error: true, message: err })
+            res.status(400).send({ error: true, msg: err })
             
         }
 

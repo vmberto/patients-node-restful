@@ -28,7 +28,7 @@ const PatientsController = {
             res.status(200).send(responseBundle);
 
         } catch (err) {
-            res.status(400).send({ error: true, message: 'Não foi possível listar os pacientes' });
+            res.status(400).send({ error: true, msg: 'Não foi possível listar os pacientes' });
         }
     },
 
