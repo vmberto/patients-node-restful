@@ -13,7 +13,6 @@ const SeekerController = {
             let data = '';
 
             resp.on('data', (chunk) => {
-                console.log(1);
                 data += chunk;
             });
 

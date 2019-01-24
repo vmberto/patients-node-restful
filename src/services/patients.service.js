@@ -7,7 +7,7 @@ const PatientsService = {
 
         let queryBuilder = listQueryBuilder(queryParams);
 
-        queryBuilder.include = [{ model: db.HealthInsurance }, { model: db.PatientStatus }];
+        queryBuilder.include = [{ model: db.HealthInsurance }, { model: db.PatientStatus }, { model: db.Contact }];
 
         /**
          * @TODO Pass this two statements to an optional query in the listQueryBuilder method
