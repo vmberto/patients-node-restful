@@ -9,11 +9,11 @@
 const listMetaBuilder = function (total, count, limit, page, filters = []) {
     
     const paginationConfig = {
-        "total": total === count ? total : count,
+        "total": total,
         "count": count,
         "per_page": parseInt(limit),
         "current_page": parseInt(page),
-        "total_pages": total < limit || total !== count ? 1 : Math.ceil(total / limit),
+        "total_pages": total < limit || total === count ? 1 : Math.ceil(total / limit),
     };
 
     const filterConfig = {}

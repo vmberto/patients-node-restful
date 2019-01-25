@@ -12,8 +12,9 @@ const PatientsController = {
         try {
 
             let { query } = req;
-            let { rows, count } = await patientsService.findAndCountAllPatients(query);
-            const total = await patientsService.countPatients();
+            let { rows, count: total } = await patientsService.findAndCountAllPatients(query);
+
+            const count = rows.length;
             const filters = [
                 { 
                   title: 'health_insurances',
