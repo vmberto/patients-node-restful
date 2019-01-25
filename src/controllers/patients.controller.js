@@ -37,14 +37,10 @@ const PatientsController = {
 
         try {
             let params = req.params;
-            let queryParams = req.query;
 
-            let patient = await patientsService.findPatient(params.id, queryParams.sessions_limit);
+            let patient = await patientsService.findPatient(params.id);
 
-            let meta = { total_sessions: await sessionsService.countSessions(params.id) };
-
-
-            res.status(200).send({ patient, meta });
+            res.status(200).send({ patient });
 
         } catch (err) {
             res.status(400).json(err);
