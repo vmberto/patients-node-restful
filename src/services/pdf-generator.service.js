@@ -29,7 +29,9 @@ const PdfGeneratorService = {
                 config: { token: payload.token, base_url: process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
             };
 
-            options.patientData.birthday = moment(options.patientData.birthday).format('DD/MM/YYYY');
+            if (options.patientData && options.patientData.birthday) {
+                options.patientData.birthday = moment(options.patientData.birthday).format('DD/MM/YYYY');
+            }
             
 
         } else if (payload.file_type === 'patient-evolution') {
