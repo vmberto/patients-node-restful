@@ -19,7 +19,7 @@ const SessionsController = {
             res.status(200).json(responseBundle);
 
         } catch (err) {
-            res.status(400).send({ error: true, message: "Não foi possível criar a sessão" });
+            res.status(400).send({ error: true, msg: "Não foi possível criar a sessão" });
         }
     },
 
@@ -39,7 +39,7 @@ const SessionsController = {
             res.status(200).send({ dataLabels, dataSets, totalPatients, totalHours });
 
         } catch (err) {
-            res.status(400).send({ error: true, message: "Não foi possível listar as estatísticas" });
+            res.status(400).send({ error: true, msg: "Não foi possível listar as estatísticas" });
         }
 
     },

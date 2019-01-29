@@ -1,6 +1,5 @@
 const Router = require('express');
 const patientsController = require('../controllers/patients.controller');
-const sessionsController = require('../controllers/sessions.controller');
 const patientsRouter = Router();
 
 patientsRouter.get('/', patientsController.getPatientsList);

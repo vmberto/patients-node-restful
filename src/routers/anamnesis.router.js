@@ -14,7 +14,7 @@ anamnesisRouter.post('/new-question/:id', anamnesisController.postCreateAnamnesi
 
 anamnesisRouter.delete('/delete-question/:id', anamnesisController.deleteAnamnesisQuestion);
 
-anamnesisRouter.post('/download/:id', anamnesisController.pdfgenerate);
+anamnesisRouter.post('/download/:id', anamnesisController.downloadAnamnesis);
 
 
 module.exports = anamnesisRouter;

@@ -140,7 +140,7 @@ const AnamnesisController = {
     * @param {Request} req 
     * @param {Response} res 
     */
-    async pdfgenerate(req, res) {
+    async downloadAnamnesis(req, res) {
 
         try {
             
@@ -162,8 +162,6 @@ const AnamnesisController = {
             res.send(file);
 
         } catch (err) {
-            console.log(err);
-            
             res.status(400).send(err);
         }
 

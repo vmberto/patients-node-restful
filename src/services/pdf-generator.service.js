@@ -28,6 +28,11 @@ const PdfGeneratorService = {
                 config: { token: payload.token, base_url: process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
             };
 
+            if (options.patientData && options.patientData.birthday) {
+                options.patientData.birthday = moment(options.patientData.birthday).format('DD/MM/YYYY');
+            }
+            
+
         } else if (payload.file_type === 'patient-evolution') {
 
             if (!payload.last_sessions_number) throw "Can't create Patient Evolution without Last Sessions Number";

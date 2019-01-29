@@ -12,8 +12,9 @@ const PatientsController = {
         try {
 
             let { query } = req;
-            let { rows, count } = await patientsService.findAndCountAllPatients(query);
-            const total = await patientsService.countPatients();
+            let { rows, count: total } = await patientsService.findAndCountAllPatients(query);
+
+            const count = rows.length;
             const filters = [
                 { 
                   title: 'health_insurances',
@@ -28,7 +29,7 @@ const PatientsController = {
             res.status(200).send(responseBundle);
 
         } catch (err) {
-            res.status(400).send({ error: true, message: 'Não foi possível listar os pacientes' });
+            res.status(400).send({ error: true, msg: 'Não foi possível listar os pacientes' });
         }
     },
 
@@ -36,14 +37,10 @@ const PatientsController = {
 
         try {
             let params = req.params;
-            let queryParams = req.query;
 
-            let patient = await patientsService.findPatient(params.id, queryParams.sessions_limit);
+            let patient = await patientsService.findPatient(params.id);
 
-            let meta = { total_sessions: await sessionsService.countSessions(params.id) };
-
-
-            res.status(200).send({ patient, meta });
+            res.status(200).send({ patient });
 
         } catch (err) {
             res.status(400).json(err);

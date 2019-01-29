@@ -26,7 +26,7 @@ const PatientsService = {
         return db.Patients.findAndCountAll(queryBuilder);
     },
 
-    findPatient(id, sessions_limit) {
+    findPatient(id) {
         
         return db.Patients
             .findByPk(id, {
@@ -36,11 +36,7 @@ const PatientsService = {
                     { model: db.Contact },
                     {
                         model: db.Sessions,
-                        limit: sessions_limit ? parseInt(sessions_limit) : null,
-                        include: [{ model: db.Humour }],
-                        order: [
-                            [ 'attendance_at', 'desc' ]
-                        ]
+                        include: [{ model: db.Humour }]
                     },
                     { model: db.MaritalStatus, include: [db.MaritalStatusType] }
                     
@@ -61,6 +57,7 @@ const PatientsService = {
                 is_private: params.is_private,
                 health_insurance_id: params.health_insurance_id || null,
                 patient_status_id: 1,
+                birthday: params.birthday,
                 MaritalStatus: {
                     childrens_number: params.childrens_number,
                     union_time: params.marital_status_type_id == 1 ? '0' : params.union_time,

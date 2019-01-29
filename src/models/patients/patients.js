@@ -16,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false
     },
+    birthday: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
     forwarded_by: {
       type: DataTypes.STRING,
       allowNull: true
