@@ -51,10 +51,10 @@ const SessionsController = {
             
             if (!errors.isEmpty()) throw errors.array();
 
-            const { last_sessions_number, patient_id } = req.body;
+            const { last_sessions_number, patient } = req.body;
             const file_type = 'patient-evolution';
 
-            payload = { patient_id, token: req.headers.authorization, last_sessions_number, file_type }
+            payload = { patient, token: req.headers.authorization, last_sessions_number, file_type }
 
             await PdfGeneratorService.generatePdf(payload);
 
@@ -67,6 +67,8 @@ const SessionsController = {
 
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send({ error: true, description: err || "Não foi possível baixar a evolução do paciente" });
         }
 

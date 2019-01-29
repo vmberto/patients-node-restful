@@ -17,27 +17,30 @@ const PdfGeneratorService = {
             if (!error) fs.unlink(filePath, function (error) { });
         });
 
-        let object;
         let options;
         
         if (payload.file_type === 'anamnesis') {
             
-            object = await anamnesisService.findAnamnesis(payload.id);
+            const anamnesis = await anamnesisService.findAnamnesis(payload.id);
             options = {
                 patientData: payload.patient || {},
-                questions: object.questions,
+                questions: anamnesis.questions,
                 config: { token: payload.token, base_url: process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
             };
 
         } else if (payload.file_type === 'patient-evolution') {
 
             if (!payload.last_sessions_number) throw "Can't create Patient Evolution without Last Sessions Number";
-            object = await sessionsService.findAllSessions( { limit: payload.last_sessions_number, orderBy: 'attendance_at', sortedBy: 'desc', patients_id: payload.patient_id } );
 
-            object.forEach(session => session.attendance_at = moment(session.attendance_at).format('DD/MM/YYYY'))
+            const patient = payload.patient;
+
+            if (patient && patient.Sessions) {
+                patient.Sessions.forEach(session => session.attendance_at = moment(session.attendance_at).format('DD/MM/YYYY'))
+            }
 
             options = {
-                sessions: object,
+                sessions: patient.Sessions,
+                patient_name: patient.name,
                 config: { token: payload.token, base_url: process.env.NODE_ENV === 'production' ? process.env.PRODUCTION_ENV : process.env.DEV_ENV }
             };
 

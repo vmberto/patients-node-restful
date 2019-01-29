@@ -4,7 +4,7 @@ const sessionsRules = {
   forEvolutionDownload: [
     check('last_sessions_number').exists().withMessage('É necessário que seja selecionado as sessões.'),
 
-    check('patient_id').exists().withMessage('É necessário que seja especificado o paciente.'),
+    check('patient').exists().withMessage('É necessário que seja especificado o paciente.'),
 
   ]
 

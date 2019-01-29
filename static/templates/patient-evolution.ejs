@@ -32,12 +32,19 @@
         hr {
             margin-top: 20px;
         }
-        
+
         h1 {
             font-weight: 600;
             text-align: center;
             font-size: 105%;
             letter-spacing: .75px;
+        }
+
+        h4 {
+            text-align: center;
+            letter-spacing: .75px;
+            font-size: 102.5%;
+            font-weight: 400;
         }
 
         div,
@@ -76,6 +83,15 @@
                 <h1>Evolução Psicológica</h1>
             </td>
         </tr>
+        <tr>
+            <td>
+                <h4>
+                    <%= patient_name %>
+                </h4>
+            </td>
+        </tr>
+
+
     </table>
 
     <% sessions.forEach(function(session) { %>
