@@ -1,5 +1,6 @@
 
 const healthInsurancesService = require('../services/health-insurance.service');
+const errorHandler = require('../utils/error-handler');            
 
 const HealthInsuranceController = {
 
@@ -44,7 +45,7 @@ const HealthInsuranceController = {
             res.status(200).json({ new_health_insurance });
     
         }catch (err){
-            res.status(400).send(err);
+            errorHandler(err.name, res);
         }
         
     },

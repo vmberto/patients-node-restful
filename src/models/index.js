@@ -22,7 +22,7 @@ fs
 
 folders.forEach(folder => {
   const currentFolder = `${__dirname}/${folder}`;
-  
+
   fs.readdirSync(currentFolder)
     .forEach(file => {
       if ((file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js')) {
@@ -42,6 +42,6 @@ Object.keys(db).forEach(modelName => {
 db.connection = connection;
 db.Sequelize = Sequelize;
 
-db.connection.sync();
+db.connection.sync().then(res => { console.log('Connected'); }).catch(err => { console.log('Connection Failed'); });
 
 module.exports = db;
