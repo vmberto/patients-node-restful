@@ -82,15 +82,15 @@ const PatientsController = {
 
     async postEditPatient(req, res) {
         try {
-            const bodyParams = req.body;
-            const urlParams = req.params;
+            const { body, params } = req;
 
-            const editedPatient = await patientsService.editPatient(urlParams.id, bodyParams, 'name');
+            const editedPatient = await patientsService.editPatient(params.id, body);
 
-
-            res.status(200).json(editedPatient);
+            res.status(200).json({ edited_patient: editedPatient });
 
         } catch (err) {
+            console.log(err);
+            
             res.status(400).send(err);
         }
 

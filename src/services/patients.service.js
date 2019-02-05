@@ -83,12 +83,19 @@ const PatientsService = {
 
     },
 
-    editPatient(id, patient, field) {
+    editPatient(id, patient) {
 
-        return db.Patients.update(patient, {
-            fields: [field],
+        const updatePatient = db.Patients.update(patient, {
             where: { id }
         });
+        const updateContact = db.Contact.update(patient.Contact, {
+            where: { id }
+        });
+        const updateAddress = db.Address.update(patient.Address, {
+            where: { id }
+        });
+
+        return Promise.all([updatePatient, updateContact, updateAddress]);
 
     },
 
